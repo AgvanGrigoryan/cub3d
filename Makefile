@@ -1,5 +1,5 @@
 # Project name
-NAME = minishell
+NAME = cub3d
 
 # Readline name
 READLINE = readline
@@ -21,7 +21,7 @@ SRCS_DIR = sources/
 OBJS_DIR = objects/
 
 # Source file names
-SRCS_NAME = cub3d.c
+SRCS_NAME = main.c utilities/utils1.c
 
 # Objects file names
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
@@ -38,6 +38,7 @@ $(NAME): $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)/utilities
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Cleaning
