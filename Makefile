@@ -21,7 +21,10 @@ SRCS_DIR = sources/
 OBJS_DIR = objects/
 
 # Source file names
-SRCS_NAME = main.c utilities/utils1.c
+SRCS_NAME = main.c\
+			utilities/utils1.c\
+			validation/input_validation.c\
+			validation/scene_validation.c
 
 # Objects file names
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
@@ -39,6 +42,7 @@ $(NAME): $(OBJS)
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/utilities
+	@mkdir -p $(OBJS_DIR)/validation
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Cleaning
