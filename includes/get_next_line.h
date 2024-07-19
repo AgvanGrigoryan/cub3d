@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 13:54:16 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/07/19 11:40:45 by aggrigor         ###   ########.fr       */
+/*   Created: 2023/02/13 11:32:45 by mnazarya          #+#    #+#             */
+/*   Updated: 2024/07/19 15:36:02 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(int argc, char *argv[])
-{
-	if (argc != 2)
-		return (pred("Error: ./cub3d <filename>.cub\n", BOLD, 2), 1);
-	if (validation(argv[1]) == -1)
-		return (1);
-	printf("FILENAME:%s\n", argv[1]);
-	return (0);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+
+char	*get_next_line(int fd);
+char	*read_str(int fd, char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(char *s, int c);
+char	*ft_find(char *s);
+char	*ft_remainder(char *s);
+
+#endif

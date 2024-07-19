@@ -12,7 +12,7 @@ INC_DIRS = -I./includes -I./$(LIBS_DIR)/$(READLINE)/include
 CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) #-g3 -fsanitize=address
 
 # Headers
-HEADERS = 	includes/cub3d.h
+HEADERS = 	includes/cub3d.h includes/get_next_line.h
 
 # Source directory
 SRCS_DIR = sources/
@@ -23,6 +23,8 @@ OBJS_DIR = objects/
 # Source file names
 SRCS_NAME = main.c\
 			utilities/utils1.c\
+			utilities/get_next_line.c\
+			utilities/get_next_line_utils.c\
 			validation/input_validation.c\
 			validation/scene_validation.c
 
