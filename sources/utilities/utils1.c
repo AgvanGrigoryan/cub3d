@@ -53,3 +53,17 @@ unsigned long	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+void	free_nmatrix(char **matrix, int n)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i] && i < n)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+	matrix = NULL;
+}

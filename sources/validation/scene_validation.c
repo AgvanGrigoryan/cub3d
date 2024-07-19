@@ -62,7 +62,7 @@ t_dyn_arr	*create_dyn_arr(void)
 int	parse_scene_file(int fd, t_scene_info *sc_info)
 {
 	t_dyn_arr	*arr2d;
-	char	*next_line;
+	char		*next_line;
 
 	arr2d = create_dyn_arr();
 	(void) sc_info; // REMOVE BEFORE USING
@@ -70,16 +70,14 @@ int	parse_scene_file(int fd, t_scene_info *sc_info)
 	{
 		next_line = get_next_line(fd);
 		if (next_line == NULL)
-			break;
+			break ;
 		if (append(arr2d, next_line) == -1)
 		{
-			// free_matrix(arr2d);
+			free_nmatrix(arr2d->arr, arr2d->length);
 			free(arr2d);
 			return (-1);
 		}
 	}
-	for (int i = 0; i < arr2d->length; i++)
-		printf("%s", arr2d->arr[i]);
-	// printf("WARNING: SCENE VALIDATION IS NOT COMPLETED, IT IS ALWAYS TRUE\n");
+	printf("WARNING: SCENE VALIDATION IS NOT COMPLETED, IT IS ALWAYS TRUE\n");
 	return (0);
 }

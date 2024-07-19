@@ -68,5 +68,6 @@ void			pred(char *str, int is_bold, int fd);
 int				ft_strcmp(const char *s1, const char *s2);
 unsigned long	ft_strlen(const char *s);
 char			*get_next_line(int fd);
+void			free_nmatrix(char **matrix, int n);
 
 #endif
