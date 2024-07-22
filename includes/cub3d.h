@@ -35,9 +35,9 @@ typedef struct s_scene_info
 	char		**map;
 }	t_scene_info;
 
-//		arr - dynamic string matrix
-//		length - current length of elements
-//		capacity - max length of elements in this array
+// arr - dynamic string matrix
+// length - current length of elements
+// capacity - max length of elements in this array
 typedef struct s_dyn_arr
 {
 	char	**arr;
@@ -45,38 +45,45 @@ typedef struct s_dyn_arr
 	int		capacity;
 }	t_dyn_arr;
 
-//input_validation.c
+// color_validation.c
+int				color_validation(char *color);
+int				is_all_colors_valid(t_scene_info *sc_info);
+
+// input_validation.c
+void			free_scene_info_struct(t_scene_info *sc_info);
+int				validation(char *scene_file);
+int				check_filename(char *scene_file);
 int				init_texs_struct(t_scene_info *sc_info);
 int				init_scene_info_struct(t_scene_info *sc_info);
-void			free_scene_info_struct(t_scene_info *sc_info);
-int				check_filename(char *scene_file);
-int				validation(char *scene_file);
 
-//scene_validation.c
-int				parse_scene_file(int fd, t_scene_info *sc_info);
+// scene_validation.c
 void			remove_extra_lines(t_dyn_arr *buf);
-int				validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf);
-int				set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf);
+int				parse_scene_file(int fd, t_scene_info *sc_info);
 int				map_validation(t_scene_info *sc_info, t_dyn_arr *buf);
+int				set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf);
+int				validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf);
 
 // utils1.c
-void			pred(char *str, int is_bold, int fd);
-int				ft_strcmp(const char *s1, const char *s2);
+unsigned long	arrlen(char **arr);
 unsigned long	ft_strlen(const char *s);
 void			free_nmatrix(char **matrix, int n);
-unsigned long	arrlen(char **arr);
+void			pred(char *str, int is_bold, int fd);
+int				ft_strcmp(const char *s1, const char *s2);
 
 // utils2.c
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_isdigit(int c);
 int				ft_isspace(char c);
-int				starts_with_digit(const char *str);
 int				is_only_spaces(const char *str);
+int				starts_with_digit(const char *str);
+
+// utils3.c
+long long int	ft_atoi(char *str);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
-int				append(t_dyn_arr *arr, char *value);
 int				pop(t_dyn_arr *arr, int index);
+int				append(t_dyn_arr *arr, char *value);
 
 // key_value_utils.c
 char			*get_value(t_key_value *arr, char *key);
@@ -87,4 +94,5 @@ char			*get_next_line(int fd);
 
 // ft_split.c
 char			**ft_split(char const *s, char *seps);
+
 #endif

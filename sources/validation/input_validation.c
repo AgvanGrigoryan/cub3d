@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_validation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
+/*   Updated: 2024/07/22 18:40:43 by natamazy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -33,6 +44,7 @@ void	free_scene_info_struct(t_scene_info *sc_info)
 {
 	int	i;
 
+	i = 0;
 	while (i < 7)
 		free(sc_info->texs[i++].value);
 	free(sc_info->texs);
@@ -53,7 +65,7 @@ int	check_filename(char *scene_file)
 	fn_len = ft_strlen(scene_file);
 	if (fn_len < FN_MIN_LEN
 		|| ft_strcmp(scene_file + (fn_len - FN_MIN_LEN), FN_EXT) != 0)
-		return (pred("CUB3D: Wrong file name\n", BOLD, 2), -1);
+		return (pred("cub3D: Wrong file name\n", BOLD, 2), -1);
 	return (0);
 }
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_validation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
+/*   Updated: 2024/07/22 18:52:19 by natamazy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
@@ -22,7 +33,7 @@ int	parse_scene_file(int fd, t_scene_info *sc_info)
 	}
 	if (validate_scene_file(sc_info, buf) == 0)
 		return (0);
-	pred("CUB3D: Validation failed\n", BOLD, 2);
+	pred("cub3D: Validation failed\n", BOLD, 2);
 	free_nmatrix(buf->arr, buf->length);
 	return (-1);
 }
@@ -47,6 +58,7 @@ void	remove_extra_lines(t_dyn_arr *buf)
 		i--;
 	}
 }
+
 int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 {
 	remove_extra_lines(buf);
@@ -54,6 +66,8 @@ int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 	if (buf == NULL || buf->length < 1) // maybe will change min length of buf
 		return (pred("Invalid scene file\n", BOLD, 2), -1);
 	if (set_texures_info(sc_info, buf) == -1)
+		return (-1);
+	if (is_all_colors_valid(sc_info) == -1)
 		return (-1);
 	// 1.check if the textures values is valid or not, 
 	//OR Check them at each iteration of the while loop before set values
@@ -88,8 +102,10 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 
 int	map_validation(t_scene_info *sc_info, t_dyn_arr *buf)
 {
-	int i = 0;
-	(void)sc_info;
+	int	i;
+
+	i = 0;
+	(void) sc_info;
 	// 2.Set map in sc_info->map
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
 		i++;
