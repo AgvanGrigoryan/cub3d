@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:05 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 19:56:41 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:57:16 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ long long int	ft_atoi(char *str)
 		if (*str >= '0' && *str <= '9')
 			sum = sum * 10 + *str - '0';
 		else
-			found = 0;
+			return (-1);
 		str++;
 	}
 	return (sign * sum);

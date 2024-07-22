@@ -2,7 +2,7 @@ NO 			./textures/bluestone.xpm
 
 
 		 	 	 	 	 	 	 	 	                  SO ./textures/greystone.xpm
-C 65,65,255
+C 65a,65,255
 WE 	./textures/eagle.xpm
 EA ./textures/redbrick.xpm
 F 71,19,00001
