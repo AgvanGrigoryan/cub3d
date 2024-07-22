@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 19:54:28 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:51:46 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	remove_extra_lines(t_dyn_arr *buf)
 	int	i;
 
 	i = 0;
-	printf("LEN:%d\n", buf->length);
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
 	{
 		if (is_only_spaces(buf->arr[i]) == 1)
@@ -86,7 +85,7 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 	i = 0;
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
 	{
-		splited = ft_split(buf->arr[i], " \t");
+		splited = ft_split(buf->arr[i], " \t\n");
 		if (splited == NULL || arrlen(splited) != 2)
 			return (pred("Incorrect texture format\n", BOLD, 2), free(splited), -1);
 		if (get_value(sc_info->texs, splited[0]) == NULL)

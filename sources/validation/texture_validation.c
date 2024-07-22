@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:15:40 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 19:55:59 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:52:25 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	texture_validation(char *texture)
 	if (fd > 2)
 		return (1);
 	else
+	{
+		printf("File not found: %s\n", texture);
 		return (-1);
+	}
 }
 
 int	are_all_textures_valid(t_scene_info *sc_info)
