@@ -22,7 +22,11 @@ OBJS_DIR = objects/
 
 # Source file names
 SRCS_NAME = main.c\
+			utilities/ft_split.c\
 			utilities/utils1.c\
+			utilities/utils2.c\
+			utilities/array_utils.c\
+			utilities/key_value_utils.c\
 			utilities/get_next_line.c\
 			utilities/get_next_line_utils.c\
 			validation/input_validation.c\

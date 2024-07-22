@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 13:54:19 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/07/16 13:54:35 by aggrigor         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -50,6 +39,16 @@ unsigned long	ft_strlen(const char *s)
 	if (!s)
 		return (0);
 	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+unsigned long	arrlen(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr && arr[i] != NULL)
 		i++;
 	return (i);
 }
