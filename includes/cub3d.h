@@ -35,6 +35,9 @@ typedef struct s_scene_info
 	char		**map;
 }	t_scene_info;
 
+//		arr - dynamic string matrix
+//		length - current length of elements
+//		capacity - max length of elements in this array
 typedef struct s_dyn_arr
 {
 	char	**arr;
@@ -51,8 +54,10 @@ int				validation(char *scene_file);
 
 //scene_validation.c
 int				parse_scene_file(int fd, t_scene_info *sc_info);
+void			remove_extra_lines(t_dyn_arr *buf);
 int				validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf);
 int				set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf);
+int				map_validation(t_scene_info *sc_info, t_dyn_arr *buf);
 
 // utils1.c
 void			pred(char *str, int is_bold, int fd);
@@ -63,10 +68,15 @@ unsigned long	arrlen(char **arr);
 
 // utils2.c
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+int				ft_isdigit(int c);
+int				ft_isspace(char c);
+int				starts_with_digit(const char *str);
+int				is_only_spaces(const char *str);
 
 // array_utils.c
-int				append(t_dyn_arr *arr, char *value);
 t_dyn_arr		*create_dyn_arr(void);
+int				append(t_dyn_arr *arr, char *value);
+int				pop(t_dyn_arr *arr, int index);
 
 // key_value_utils.c
 char			*get_value(t_key_value *arr, char *key);

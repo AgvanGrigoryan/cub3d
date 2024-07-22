@@ -24,3 +24,33 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		substr[substr_len] = s[substr_len];
 	return (substr);
 }
+
+int	ft_isdigit(int c)
+{
+	return ('0' <= c && c <= '9');
+}
+
+int	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+}
+
+int	starts_with_digit(const char *str)
+{
+	if (str == NULL)
+		return (0);
+	while (*str && ft_isspace(*str) == 1)
+		str++;
+	return (ft_isdigit(*str));
+}
+
+int	is_only_spaces(const char *str)
+{
+	while (str && *str)
+	{
+		if (ft_isspace(*str) == 0)
+			return (0);
+		str++;
+	}
+	return (1);
+}

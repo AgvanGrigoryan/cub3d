@@ -1,11 +1,24 @@
 
 #include "cub3d.h"
 
-// The function of adding a value to an array makes the array dynamic
+t_dyn_arr	*create_dyn_arr(void)
+{
+	t_dyn_arr	*dyn_arr;
+
+	dyn_arr = malloc(sizeof(t_dyn_arr));
+	if (dyn_arr == NULL)
+		return (perror("CREATE_DYN_ARR"), NULL);
+	dyn_arr->arr = malloc(sizeof(char *));
+	if (dyn_arr->arr == NULL)
+		return (perror("CREATE_DYN_ARR"), NULL);
+	dyn_arr->capacity = 1;
+	dyn_arr->length = 0;
+	return (dyn_arr);
+}
+
+// The function of adding a value to an array makes the array dynamic.
 //arguments:
-//		data - current array
-//		length - current length of elements
-//		capacity - max length of elements in this array
+//		arr - dynamic array
 //		value - new value of array
 int	append(t_dyn_arr *arr, char *value)
 {
@@ -32,17 +45,18 @@ int	append(t_dyn_arr *arr, char *value)
 	return (0);
 }
 
-t_dyn_arr	*create_dyn_arr(void)
+int	pop(t_dyn_arr *arr, int index)
 {
-	t_dyn_arr	*dyn_arr;
-
-	dyn_arr = malloc(sizeof(t_dyn_arr));
-	if (dyn_arr == NULL)
-		return (perror("CREATE_DYN_ARR"), NULL);
-	dyn_arr->arr = malloc(sizeof(char *));
-	if (dyn_arr->arr == NULL)
-		return (perror("CREATE_DYN_ARR"), NULL);
-	dyn_arr->capacity = 1;
-	dyn_arr->length = 0;
-	return (dyn_arr);
+	if (arr == NULL)
+		return (-1);
+	if (index < 0 || index >= arr->length)
+		return (-1);
+	free(arr->arr[index]);
+	while (index < arr->length)
+	{
+		arr->arr[index] = arr->arr[index + 1];
+		index++;
+	}
+	arr->length -= 1;
+	return (0);
 }

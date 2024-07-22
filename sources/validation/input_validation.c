@@ -31,7 +31,7 @@ int	init_scene_info_struct(t_scene_info *sc_info)
 
 void	free_scene_info_struct(t_scene_info *sc_info)
 {
-	int				i;
+	int	i;
 
 	while (i < 7)
 		free(sc_info->texs[i++].value);
