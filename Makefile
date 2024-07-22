@@ -32,6 +32,7 @@ SRCS_NAME = main.c \
 			utilities/get_next_line_utils.c \
 			validation/input_validation.c \
 			validation/scene_validation.c \
+			validation/texture_validation.c \
 			validation/color_validation.c
 
 # Objects file names

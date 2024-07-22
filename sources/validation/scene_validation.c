@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 18:52:19 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:51:12 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 		return (pred("Invalid scene file\n", BOLD, 2), -1);
 	if (set_texures_info(sc_info, buf) == -1)
 		return (-1);
-	if (is_all_colors_valid(sc_info) == -1)
+	if (are_all_colors_valid(sc_info) == -1)
 		return (-1);
+	if (are_all_textures_valid(sc_info) == -1)
+		return (-1);
+	
+	
 	// 1.check if the textures values is valid or not, 
 	//OR Check them at each iteration of the while loop before set values
 	if (map_validation(sc_info, buf) == -1)

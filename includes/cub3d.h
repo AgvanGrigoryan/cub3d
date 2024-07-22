@@ -46,8 +46,7 @@ typedef struct s_dyn_arr
 }	t_dyn_arr;
 
 // color_validation.c
-int				color_validation(char *color);
-int				is_all_colors_valid(t_scene_info *sc_info);
+int				are_all_colors_valid(t_scene_info *sc_info);
 
 // input_validation.c
 void			free_scene_info_struct(t_scene_info *sc_info);
@@ -62,6 +61,9 @@ int				parse_scene_file(int fd, t_scene_info *sc_info);
 int				map_validation(t_scene_info *sc_info, t_dyn_arr *buf);
 int				set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf);
 int				validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf);
+
+// texture_validation.c
+int				are_all_textures_valid(t_scene_info *sc_info);
 
 // utils1.c
 unsigned long	arrlen(char **arr);
