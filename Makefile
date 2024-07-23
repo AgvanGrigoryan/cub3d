@@ -27,10 +27,12 @@ SRCS_NAME = main.c \
 			utilities/utils2.c \
 			utilities/utils3.c \
 			utilities/array_utils.c \
+			utilities/convert_tabs.c \
 			utilities/key_value_utils.c \
 			utilities/get_next_line.c \
 			utilities/get_next_line_utils.c \
 			validation/input_validation.c \
+			validation/map_validation.c \
 			validation/scene_validation.c \
 			validation/texture_validation.c \
 			validation/color_validation.c

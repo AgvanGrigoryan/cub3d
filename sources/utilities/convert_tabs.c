@@ -6,9 +6,11 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:40:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 17:40:45 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:55:19 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	free_map(t_line *map)
 {
@@ -32,6 +34,16 @@ int	count_char(const char *str, char sym)
 		str++;
 	}
 	return (cnt);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*ptr;
+
+	ptr = s;
+	while (n--)
+		*(ptr++) = (char)c;
+	return (s);
 }
 
 char	*replace_tabs(char *str, t_line	*line)

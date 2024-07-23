@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 14:21:42 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:55:48 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_key_value
 typedef struct s_scene_info
 {
 	t_key_value	*texs;
-	t_map		*map;
+	char		**map;
 }	t_scene_info;
 
 // arr - dynamic string matrix
@@ -80,8 +80,8 @@ int				init_scene_info_struct(t_scene_info *sc_info);
 
 // scene_validation.c
 void			remove_extra_lines(t_dyn_arr *buf);
+int				map_validation(t_line *map);
 int				parse_scene_file(int fd, t_scene_info *sc_info);
-int				map_validation(t_scene_info *sc_info, t_dyn_arr *buf);
 int				set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf);
 int				validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf);
 
@@ -109,6 +109,9 @@ long long int	ft_atoi(char *str);
 t_dyn_arr		*create_dyn_arr(void);
 int				pop(t_dyn_arr *arr, int index);
 int				append(t_dyn_arr *arr, char *value);
+
+// convert_tabs.c
+t_line			*get_converted_map(t_dyn_arr *buf);
 
 // key_value_utils.c
 char			*get_value(t_key_value *arr, char *key);
