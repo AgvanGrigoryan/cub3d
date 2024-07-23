@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 17:46:07 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:57:42 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ void	remove_extra_lines(t_dyn_arr *buf)
 	}
 }
 
+// maybe will change min length of buf
+// line if (buf == NULL || buf->length < 1)
 int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 {
 	t_line	*map;
 
 	remove_extra_lines(buf);
 	printf("\n\033[0;33mWARNING: MAP VALIDATION IS NOT COMPLETED\033[0m\n\n");
-	if (buf == NULL || buf->length < 1) // maybe will change min length of buf
+	if (buf == NULL || buf->length < 1)
 		return (pred("Invalid scene file\n", BOLD, 2), -1);
 	if (set_texures_info(sc_info, buf) == -1)
 		return (-1);

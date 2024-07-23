@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 17:55:48 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:55:39 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int				starts_with_digit(const char *str);
 
 // utils3.c
 long long int	ft_atoi(char *str);
+int				is_empty_line(t_line *map, int i);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);

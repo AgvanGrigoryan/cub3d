@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:05 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 21:57:16 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:55:46 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ long long int	ft_atoi(char *str)
 		str++;
 	}
 	return (sign * sum);
+}
+
+int	is_empty_line(t_line *map, int i)
+{
+	if (i == 0 || map[i + 1].val != NULL)
+		return (-1);
+	return (1);
 }
