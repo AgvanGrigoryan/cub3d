@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:43:36 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 18:13:36 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:50:25 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	is_valid_door(t_line *map, int i, int j)
 
 int	is_valid_blank(t_line *map, int i, int j)
 {
+	if (j == 0 || j == map[i].len - 2)
+		return (-1);
 	if (map[i - 1].len < j || map[i + 1].len < j)
 		return (-1);
 	if (map[i - 1].val[j] != '\0' && (map[i - 1].val[j] == ' ' || map[i - 1].val[j] == '\0'))
@@ -87,7 +89,7 @@ int	map_validation(t_line *map)
 			res += is_valid_border(map[i].val);
 		else
 			res += is_valid_line(map, i);
-		// printf("last map %s %d line - %d\n", map[i].val, res, i);
+		printf("last map %s %d line - %d\n", map[i].val, res, i);
 		i++;
 	}
 	if (res == 0)
