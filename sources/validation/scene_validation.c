@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 13:58:27 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:43:59 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,20 +99,5 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 		free(splited);
 		i++;
 	}
-	return (0);
-}
-
-int	map_validation(t_scene_info *sc_info, t_dyn_arr *buf)
-{
-	int	i;
-
-	i = 0;
-	(void) sc_info;
-	// 2.Set map in sc_info->map
-	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
-		i++;
-	for (; i < buf->length; i++)
-		printf("%d:\t[%s", i, buf->arr[i]);
-	printf("\n");
 	return (0);
 }

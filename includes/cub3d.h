@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 13:59:23 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:21:42 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ strerror, exit, math functions
 # define FN_MIN_LEN 4
 # define FN_EXT ".cub"
 
+typedef struct s_line
+{
+	char	*val;
+	int		len;
+}	t_line;
+
+typedef struct s_map
+{
+	t_line	*lines;
+	int		size;
+}	t_map;
+
 typedef struct s_key_value
 {
 	char	*key;
@@ -43,7 +55,7 @@ typedef struct s_key_value
 typedef struct s_scene_info
 {
 	t_key_value	*texs;
-	char		**map;
+	t_map		*map;
 }	t_scene_info;
 
 // arr - dynamic string matrix
