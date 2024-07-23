@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:54 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 21:59:50 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:57:54 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	color_validation(char *color)
 	long long int		num;
 	char				**colors;
 
-	colors = ft_split(color, ".,");
+	colors = ft_split(color, ",");
 	i = 0;
 	if (i > 3)
 		return (pred("Incorrect color format | xxx.xxx.xxx\n", BOLD, 2), -1);

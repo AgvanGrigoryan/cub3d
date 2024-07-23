@@ -53,7 +53,12 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)/utilities
 	@mkdir -p $(OBJS_DIR)/validation
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo Compiling
+	@printf "Compiling $<: ["
+	@for i in {1..30}; do \
+		printf "#"; \
+		sleep 0.005; \
+	done; \
+	printf "]\n";
 
 # Cleaning
 clean:
