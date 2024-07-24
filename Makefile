@@ -9,7 +9,7 @@ CC = cc
 
 # Compilator flags
 INC_DIRS = -I./includes
-CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) -g3 -fsanitize=address
 
 # Headers
 HEADERS = includes/cub3d.h includes/get_next_line.h

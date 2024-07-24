@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:43:36 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 22:56:59 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:09:59 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,24 @@ int	is_valid_blank(t_line *map, int i, int j)
 	return (0);
 }
 
-int	is_valid_line(t_line *map, int i)
+int	is_player(char s, int *pl)
+{
+	if (s == 'N' || s == 'n'
+		|| s == 'S' || s == 's'
+		|| s == 'E' || s == 'e'
+		|| s == 'W' || s == 'w')
+	{
+		if (*pl == 0)
+			*pl = 1;
+		else
+			return (-1);
+		return (0);
+	}
+	else
+		return (0);
+}
+
+int	is_valid_line(t_line *map, int i, int *pl)
 {
 	int	j;
 
@@ -75,17 +92,23 @@ int	is_valid_line(t_line *map, int i)
 			return (-1);
 		else if (map[i].val[j] == 'D' && is_valid_door(map, i, j) == -1)
 			return (-1);
+		else if (is_player(map[i].val[j], pl) == -1)
+			return (-1);
 		j++;
 	}
+	if (pl == 0)
+		return (-1);
 	return (0);
 }
 
 int	map_validation(t_line *map)
 {
 	int	i;
+	int	pl;
 	int	res;
 
 	i = 0;
+	pl = 0;
 	res = 0;
 	while (map[i].val != NULL && res == 0)
 	{
@@ -96,10 +119,10 @@ int	map_validation(t_line *map)
 		else if (map[i].len == 1)
 			res += is_empty_line(map, i);
 		else
-			res += is_valid_line(map, i);
+			res += is_valid_line(map, i, &pl);
 		i++;
 	}
-	if (res == 0)
+	if (res == 0 || pl == 0)
 		return (0);
 	else
 		return (pred("Invalid map\n", BOLD, 2), -1);
