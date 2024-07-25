@@ -8,8 +8,10 @@ READLINE = readline
 CC = cc
 
 # Compilator flags
-INC_DIRS = -I./includes
-CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) -g3 -fsanitize=address
+INC_DIRS = -I./includes -I./mlx
+LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) #-g3 -fsanitize=address
+
 
 # Headers
 HEADERS = includes/cub3d.h includes/get_next_line.h
@@ -45,11 +47,8 @@ OBJS_NAME = $(SRCS_NAME:.c=.o)
 # Compilation process
 all: $(NAME)
 
-linux_minishell: $(OBJS)
-	@$(CC) $(CFLAGS) $^ -o $@
-
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)
