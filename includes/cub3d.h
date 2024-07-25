@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 22:55:39 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/07/25 13:45:41 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int				validation(char *scene_file);
 int				check_filename(char *scene_file);
 int				init_texs_struct(t_scene_info *sc_info);
 int				init_scene_info_struct(t_scene_info *sc_info);
+
+// player_validation.c
+int				is_player(char s, int *pl);
 
 // scene_validation.c
 void			remove_extra_lines(t_dyn_arr *buf);
