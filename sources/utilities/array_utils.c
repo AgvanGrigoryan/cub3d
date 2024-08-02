@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:23:11 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 18:23:15 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:52:26 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	pop(t_dyn_arr *arr, int index)
 	if (index < 0 || index >= arr->length)
 		return (-1);
 	free(arr->arr[index]);
-	while (index < arr->length)
+	while (index < arr->length - 1)
 	{
 		arr->arr[index] = arr->arr[index + 1];
 		index++;
