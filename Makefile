@@ -38,7 +38,8 @@ SRCS_NAME = main.c \
 			validation/player_validation.c \
 			validation/scene_validation.c \
 			validation/texture_validation.c \
-			validation/color_validation.c
+			validation/color_validation.c \
+			gameplay/game_start.c
 
 # Objects file names
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
@@ -54,6 +55,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/utilities
 	@mkdir -p $(OBJS_DIR)/validation
+	@mkdir -p $(OBJS_DIR)/gameplay
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "Compiling $<: ["
 	@for i in {1..30}; do \

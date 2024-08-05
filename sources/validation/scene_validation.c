@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 22:57:42 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:53:33 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	remove_extra_lines(t_dyn_arr *buf)
 // line if (buf == NULL || buf->length < 1)
 int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 {
-	t_line	*map;
-
 	remove_extra_lines(buf);
 	printf("\n\033[0;33mWARNING: MAP VALIDATION IS NOT COMPLETED\033[0m\n\n");
 	if (buf == NULL || buf->length < 1)
@@ -74,8 +72,10 @@ int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 		return (-1);
 	if (are_all_textures_valid(sc_info) == -1)
 		return (-1);
-	map = get_converted_map(buf);
-	if (map_validation(map) == -1)
+	sc_info->map = get_converted_map(buf);
+	if (sc_info->map == NULL)
+		return (-1);
+	if (map_validation(sc_info->map) == -1)
 		return (-1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:05 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 22:55:46 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:22:37 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,26 @@ int	is_empty_line(t_line *map, int i)
 	if (i == 0 || map[i + 1].val != NULL)
 		return (-1);
 	return (1);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	str_to_trgb(char *str)
+{
+	char	**tmp;
+
+	tmp = ft_split(str, ",");
+	return (create_trgb(0, ft_atoi(tmp[0]),
+			ft_atoi(tmp[1]), ft_atoi(tmp[2])));
+}
+
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }

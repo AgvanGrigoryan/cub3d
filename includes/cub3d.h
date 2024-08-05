@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/25 13:45:41 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:19:16 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ strerror, exit, math functions
 # define FN_MIN_LEN 4
 # define FN_EXT ".cub"
 
+# define WIN_W 1080
+# define WIN_H 920
 typedef struct s_line
 {
 	char	*val;
@@ -55,8 +57,46 @@ typedef struct s_key_value
 typedef struct s_scene_info
 {
 	t_key_value	*texs;
-	char		**map;
+	t_line		*map;
 }	t_scene_info;
+
+typedef struct s_img
+{
+	int		h;
+	int		w;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+// typedef struct s_trgb
+// {
+// 	int	t;
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }	t_trgb;
+
+typedef struct s_texs
+{
+	t_img	no;
+	t_img	so;
+	t_img	ea;
+	t_img	we;
+	int		flr;
+	int		clg;
+}	t_texs;
+
+typedef struct s_game_info
+{
+	void			*mlx;
+	void			*win;
+	t_img			img;
+	t_texs			texs;
+	t_line			*map;
+}	t_game_info;
 
 // arr - dynamic string matrix
 // length - current length of elements
@@ -68,12 +108,17 @@ typedef struct s_dyn_arr
 	int		capacity;
 }	t_dyn_arr;
 
+// main.c
+
+// game_start.c
+int	game_start(t_scene_info *info);
+
 // color_validation.c
 int				are_all_colors_valid(t_scene_info *sc_info);
 
 // input_validation.c
 void			free_scene_info_struct(t_scene_info *sc_info);
-int				validation(char *scene_file);
+int				validation(char *scene_file, t_scene_info *sc_info);
 int				check_filename(char *scene_file);
 int				init_texs_struct(t_scene_info *sc_info);
 int				init_scene_info_struct(t_scene_info *sc_info);
@@ -108,6 +153,9 @@ int				starts_with_digit(const char *str);
 // utils3.c
 long long int	ft_atoi(char *str);
 int				is_empty_line(t_line *map, int i);
+int				create_trgb(int t, int r, int g, int b);
+int				str_to_trgb(char *str);
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);

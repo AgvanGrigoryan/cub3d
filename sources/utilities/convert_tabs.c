@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_tabs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:40:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/23 17:55:19 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:33:02 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_line	*get_converted_map(t_dyn_arr *buf)
 	map_len = buf->length - i;
 	map = malloc(sizeof(t_line) * (map_len + 1));
 	if (map == NULL)
-		return (perror("GET_MAP"), NULL);
+		return (perror("GET_CONVERTED_MAP"), NULL);
 	while (j < map_len)
 	{
 		map[j].val = replace_tabs(buf->arr[i], map + j);

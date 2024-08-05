@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 18:40:43 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:51:11 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	free_scene_info_struct(t_scene_info *sc_info)
 	i = 0;
 	if (sc_info->map == NULL)
 		return ;
-	while (sc_info->map[i] != NULL)
-		free(sc_info->map[i++]);
+	while (sc_info->map[i].val != NULL)
+		free(sc_info->map[i++].val);
 	free(sc_info->map);
 	sc_info->map = NULL;
 }
@@ -69,9 +69,8 @@ int	check_filename(char *scene_file)
 	return (0);
 }
 
-int	validation(char *scene_file)
+int	validation(char *scene_file, t_scene_info *sc_info)
 {
-	t_scene_info	sc_info;
 	int				fd;
 
 	if (scene_file == NULL)
@@ -81,11 +80,11 @@ int	validation(char *scene_file)
 	fd = open(scene_file, O_RDONLY);
 	if (fd == -1)
 		return (perror(scene_file), -1);
-	if (init_scene_info_struct(&sc_info) == -1)
+	if (init_scene_info_struct(sc_info) == -1)
 		return (1);
-	if (parse_scene_file(fd, &sc_info) == -1)
+	if (parse_scene_file(fd, sc_info) == -1)
 	{
-		free_scene_info_struct(&sc_info);
+		free_scene_info_struct(sc_info);
 		return (-1);
 	}
 	return (0);
