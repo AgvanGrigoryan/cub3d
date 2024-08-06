@@ -9,7 +9,7 @@ CC = cc
 
 # Compilator flags
 INC_DIRS = -I./includes -I./mlx
-LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+LDFLAGS = -L./mlx -lmlx -framework OpenGL -framework AppKit
 CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) -g3 -fsanitize=address
 
 
