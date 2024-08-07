@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/05 21:19:16 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:38:22 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ strerror, exit, math functions
 
 # define WIN_W 1080
 # define WIN_H 920
+
 typedef struct s_line
 {
 	char	*val;
@@ -111,7 +112,7 @@ typedef struct s_dyn_arr
 // main.c
 
 // game_start.c
-int	game_start(t_scene_info *info);
+int				game_start(t_scene_info *info);
 
 // color_validation.c
 int				are_all_colors_valid(t_scene_info *sc_info);

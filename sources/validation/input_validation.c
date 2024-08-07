@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/03 14:51:11 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:37:30 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_filename(char *scene_file)
 
 int	validation(char *scene_file, t_scene_info *sc_info)
 {
-	int				fd;
+	int	fd;
 
 	if (scene_file == NULL)
 		return (-1);
