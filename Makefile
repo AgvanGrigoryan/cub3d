@@ -9,7 +9,7 @@ CC = cc
 
 # Compilator flags
 INC_DIRS = -I./includes -I./mlx
-LDFLAGS = -L./mlx -lmlx -framework OpenGL -framework AppKit
+LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 CFLAGS = -Wall -Wextra -Werror $(INC_DIRS) -g3 -fsanitize=address
 
 
@@ -28,6 +28,7 @@ SRCS_NAME = main.c \
 			utilities/utils1.c \
 			utilities/utils2.c \
 			utilities/utils3.c \
+			utilities/utils4.c \
 			utilities/array_utils.c \
 			utilities/convert_tabs.c \
 			utilities/key_value_utils.c \
@@ -39,7 +40,9 @@ SRCS_NAME = main.c \
 			validation/scene_validation.c \
 			validation/texture_validation.c \
 			validation/color_validation.c \
-			gameplay/game_start.c
+			gameplay/game.c\
+			gameplay/raycasting.c\
+			gameplay/movement.c
 
 # Objects file names
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))

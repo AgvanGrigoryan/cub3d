@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/05 21:19:16 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:39:11 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ strerror, exit, math functions
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <math.h>
 
 // colored printing
 # define RED	"\033[0;031m"
@@ -36,6 +37,17 @@ strerror, exit, math functions
 
 # define WIN_W 1080
 # define WIN_H 920
+
+# define ROT_SPEED 0.1
+# define WALK_SPEED 0.2
+// KEYCODES
+# define A_KEYCODE 0
+# define S_KEYCODE 1
+# define D_KEYCODE 2
+# define W_KEYCODE 13
+# define LEFT_ARROW_KEYCODE 123
+# define RIGHT_ARROW_KEYCODE 124
+
 typedef struct s_line
 {
 	char	*val;
@@ -89,13 +101,25 @@ typedef struct s_texs
 	int		clg;
 }	t_texs;
 
+typedef struct s_player
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+}	t_player;
+
 typedef struct s_game_info
 {
+	
 	void			*mlx;
 	void			*win;
+	t_line			*map;
 	t_img			img;
 	t_texs			texs;
-	t_line			*map;
+	t_player		pl;
 }	t_game_info;
 
 // arr - dynamic string matrix
@@ -110,8 +134,19 @@ typedef struct s_dyn_arr
 
 // main.c
 
-// game_start.c
-int	game_start(t_scene_info *info);
+// game.c
+int				close_game(t_game_info *info);
+int				init_textures_img(t_game_info *game, t_scene_info *sc_info);
+void			init_player_info(t_line *map, t_player *pl);
+int				game_init(t_game_info *game, t_scene_info *sc_info);
+int				game_start(t_scene_info *info);
+
+// raycasting.c
+int				draw_scene(t_game_info *game);
+void			raycasting();
+
+// movement.c
+void			rotate_view(int keycode, t_player *pl);
 
 // color_validation.c
 int				are_all_colors_valid(t_scene_info *sc_info);
@@ -155,8 +190,15 @@ long long int	ft_atoi(char *str);
 int				is_empty_line(t_line *map, int i);
 int				create_trgb(int t, int r, int g, int b);
 int				str_to_trgb(char *str);
-void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+// utils4.c
+// ternar for double numbers
+double			ternard(int condition, double yes, double no);
+void			set_player_dir(char pl_dir, t_player *pl);
+void			set_player_pos(t_line *map, t_player *pl);
+int				movement(int key, t_game_info *game);
+void			my_mlx_image_clear(t_img *img);
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
 int				pop(t_dyn_arr *arr, int index);
