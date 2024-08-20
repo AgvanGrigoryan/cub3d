@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 20:50:32 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 01:11:35 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,61 @@ void	rotate_view(int keycode, t_player *pl)
 		pl->dirY = oldDirX * sin(ROT_SPEED) + pl->dirY * cos(ROT_SPEED);
 		pl->planeX = pl->planeX * cos(ROT_SPEED) - pl->planeY * sin(ROT_SPEED);
 		pl->planeY = oldPlaneX * sin(ROT_SPEED) + pl->planeY * cos(ROT_SPEED);
+	}
+}
+
+void	move_left(t_line *map, t_player *pl)
+{
+	double x;
+	double y;
+
+	x = pl->posX - pl->dirY * WALK_SPEED;
+	y = pl->posY + pl->dirX * WALK_SPEED;
+	if (map[(int)x].val[(int)y] != '1')
+	{
+		pl->posX = x;
+		pl->posY = y;
+	}
+}
+
+void	move_right(t_line *map, t_player *pl)
+{
+	double x;
+	double y;
+
+	x = pl->posX + pl->dirY * WALK_SPEED;
+	y = pl->posY - pl->dirX * WALK_SPEED;
+	if (map[(int)x].val[(int)y] != '1')
+	{
+		pl->posX = x;
+		pl->posY = y;
+	}
+}
+
+void	move_back(t_line *map, t_player *pl)
+{
+	double x;
+	double y;
+
+	x = pl->posX - pl->dirX * WALK_SPEED;
+	y = pl->posY - pl->dirY * WALK_SPEED;
+	if (map[(int)x].val[(int)y] != '1')
+	{
+		pl->posX = x;
+		pl->posY = y;
+	}
+}
+
+void	move_ahead(t_line *map, t_player *pl)
+{
+	double	x;
+	double	y;
+
+	x = pl->posX + pl->dirX * WALK_SPEED;
+	y = pl->posY + pl->dirY * WALK_SPEED;
+	if (map[(int)x].val[(int)y] != '1')
+	{
+		pl->posX = x;
+		pl->posY = y;
 	}
 }

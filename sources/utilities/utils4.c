@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 23:11:10 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 01:17:31 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,27 @@ int	key_hook(int key, t_game_info *game)
 		rotate_view(key, &game->pl);
 	if (key == W_KEYCODE)
 	{
-		game->pl.posX += game->pl.dirX * WALK_SPEED;
-		game->pl.posY += game->pl.dirY * WALK_SPEED;
+		move_ahead(game->map, &game->pl);
+		// game->pl.posX += game->pl.dirX * WALK_SPEED;
+		// game->pl.posY += game->pl.dirY * WALK_SPEED;
 	}
 	if (key == S_KEYCODE)
 	{
-		game->pl.posX -= game->pl.dirX * WALK_SPEED;
-		game->pl.posY -= game->pl.dirY * WALK_SPEED;
+		move_back(game->map, &game->pl);
+		// game->pl.posX -= game->pl.dirX * WALK_SPEED;
+		// game->pl.posY -= game->pl.dirY * WALK_SPEED;
 	}
 	if (key == A_KEYCODE)
 	{
-		game->pl.posY += game->pl.dirX * WALK_SPEED;
-		game->pl.posX -= game->pl.dirY * WALK_SPEED;
+		move_left(game->map, &game->pl);
+		// game->pl.posY += game->pl.dirX * WALK_SPEED;
+		// game->pl.posX -= game->pl.dirY * WALK_SPEED;
 	}
 	if (key == D_KEYCODE)
 	{
-		game->pl.posY -= game->pl.dirX * WALK_SPEED;
-		game->pl.posX += game->pl.dirY * WALK_SPEED;
+		move_right(game->map, &game->pl);
+		// game->pl.posY -= game->pl.dirX * WALK_SPEED;
+		// game->pl.posX += game->pl.dirY * WALK_SPEED;
 	}
 	return (key);
 }

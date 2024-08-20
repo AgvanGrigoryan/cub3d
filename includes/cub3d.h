@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/20 23:04:43 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 01:00:07 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,10 @@ void			raycasting();
 
 // movement.c
 void			rotate_view(int keycode, t_player *pl);
+void			move_left(t_line *map, t_player *pl);
+void			move_right(t_line *map, t_player *pl);
+void			move_back(t_line *map, t_player *pl);
+void			move_ahead(t_line *map, t_player *pl);
 
 // color_validation.c
 int				are_all_colors_valid(t_scene_info *sc_info);

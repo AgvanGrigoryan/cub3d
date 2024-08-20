@@ -1,5 +1,5 @@
 1. Fix textures drawing
-2. Add wall Collision
+
 3. Add Doors Mechanism
 4. Add movement with the mouse
 ?. maybe convert map to char **
