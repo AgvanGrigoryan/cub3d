@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 01:11:35 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 01:29:12 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ void	move_left(t_line *map, t_player *pl)
 	double y;
 
 	x = pl->posX - pl->dirY * WALK_SPEED;
+	y = pl->posY;
+	if (map[(int)x].val[(int)y] != '1')
+		pl->posX = x;
+	x = pl->posX;
 	y = pl->posY + pl->dirX * WALK_SPEED;
 	if (map[(int)x].val[(int)y] != '1')
-	{
-		pl->posX = x;
 		pl->posY = y;
-	}
 }
 
 void	move_right(t_line *map, t_player *pl)
@@ -56,12 +57,13 @@ void	move_right(t_line *map, t_player *pl)
 	double y;
 
 	x = pl->posX + pl->dirY * WALK_SPEED;
+	y = pl->posY;
+	if (map[(int)x].val[(int)y] != '1')
+		pl->posX = x;
+	x = pl->posX;
 	y = pl->posY - pl->dirX * WALK_SPEED;
 	if (map[(int)x].val[(int)y] != '1')
-	{
-		pl->posX = x;
 		pl->posY = y;
-	}
 }
 
 void	move_back(t_line *map, t_player *pl)
@@ -70,12 +72,13 @@ void	move_back(t_line *map, t_player *pl)
 	double y;
 
 	x = pl->posX - pl->dirX * WALK_SPEED;
+	y = pl->posY;
+	if (map[(int)x].val[(int)y] != '1')
+		pl->posX = x;
+	x = pl->posX;
 	y = pl->posY - pl->dirY * WALK_SPEED;
 	if (map[(int)x].val[(int)y] != '1')
-	{
-		pl->posX = x;
 		pl->posY = y;
-	}
 }
 
 void	move_ahead(t_line *map, t_player *pl)
@@ -84,10 +87,11 @@ void	move_ahead(t_line *map, t_player *pl)
 	double	y;
 
 	x = pl->posX + pl->dirX * WALK_SPEED;
+	y = pl->posY;
+	if (map[(int)x].val[(int)y] != '1')
+		pl->posX = x;
+	x = pl->posX;
 	y = pl->posY + pl->dirY * WALK_SPEED;
 	if (map[(int)x].val[(int)y] != '1')
-	{
-		pl->posX = x;
 		pl->posY = y;
-	}
 }
