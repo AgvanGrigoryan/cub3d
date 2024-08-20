@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/11 21:38:31 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:03:29 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ void	set_player_dir(char pl_dir, t_player *pl)
 	pl->dirX = 0;
 	if (pl_dir == 'W')
 	{
-		pl->dirX = -1;
+		pl->dirY = -1.0;
 		pl->planeX = -0.66;
 	}
 	else if (pl_dir == 'E')
 	{
-		pl->dirX = 1;
-		pl->planeX = 0.90;
+		pl->dirY = 1.0;
+		pl->planeX = 0.66;
 	}
 	else if (pl_dir == 'S')
 	{
-		pl->dirY = -1;
+		pl->dirX = 1.0;
 		pl->planeY = -0.66;
 	}
 	else if (pl_dir == 'N')
 	{
-		pl->dirY = 1;
+		pl->dirX = -1.0;
 		pl->planeY = 0.66;
 	}
 }
@@ -62,8 +62,8 @@ void	set_player_pos(t_line *map, t_player *pl)
 			if (map[i].val[j] == 'W' || map[i].val[j] == 'N'
 				|| map[i].val[j] == 'S' || map[i].val[j] == 'E')
 			{
-				pl->posX = (double) i;
-				pl->posY = (double) j;
+				pl->posX = (double) i + 0.5;
+				pl->posY = (double) j + 0.5;
 				return ;
 			}
 			j++;
@@ -79,23 +79,23 @@ int	movement(int key, t_game_info *game)
 		rotate_view(key, &game->pl);
 	if (key == W_KEYCODE)
 	{
-		game->pl.posX += game->pl.dirY * WALK_SPEED;
-		game->pl.posY += game->pl.dirX * WALK_SPEED;
+		game->pl.posX += game->pl.dirX * WALK_SPEED;
+		game->pl.posY += game->pl.dirY * WALK_SPEED;
 	}
 	if (key == S_KEYCODE)
 	{
-		game->pl.posX -= game->pl.dirY * WALK_SPEED;
-		game->pl.posY -= game->pl.dirX * WALK_SPEED;
+		game->pl.posX -= game->pl.dirX * WALK_SPEED;
+		game->pl.posY -= game->pl.dirY * WALK_SPEED;
 	}
 	if (key == A_KEYCODE)
 	{
-		game->pl.posY += game->pl.dirY * WALK_SPEED;
-		game->pl.posX -= game->pl.dirX * WALK_SPEED;
+		game->pl.posY += game->pl.dirX * WALK_SPEED;
+		game->pl.posX -= game->pl.dirY * WALK_SPEED;
 	}
 	if (key == D_KEYCODE)
 	{
-		game->pl.posY -= game->pl.dirY * WALK_SPEED;
-		game->pl.posX += game->pl.dirX * WALK_SPEED;
+		game->pl.posY -= game->pl.dirX * WALK_SPEED;
+		game->pl.posX += game->pl.dirY * WALK_SPEED;
 	}
 	return (key);
 }

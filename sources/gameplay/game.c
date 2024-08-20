@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 15:27:05 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:30:06 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ int	init_textures_img(t_game_info *game, t_scene_info *sc_info)
 			&game->texs.we.w, &game->texs.we.h);
 	// add to states of doors and sprite textures
 	if (check_texs_img(&game->texs) == -1)
-		return (destroy_texs_imgs(game->mlx, &game->texs));
+		return (destroy_texs_imgs(game->mlx, &game->texs), -1);
+	game->texs.ea.addr = mlx_get_data_addr(game->texs.ea.img, &game->texs.ea.bpp, &game->texs.ea.line_len, &game->texs.ea.endian);
+	game->texs.no.addr = mlx_get_data_addr(game->texs.no.img, &game->texs.no.bpp, &game->texs.no.line_len, &game->texs.no.endian);
+	game->texs.so.addr = mlx_get_data_addr(game->texs.so.img, &game->texs.so.bpp, &game->texs.so.line_len, &game->texs.so.endian);
+	game->texs.we.addr = mlx_get_data_addr(game->texs.we.img, &game->texs.we.bpp, &game->texs.we.line_len, &game->texs.we.endian);
 	return (0);
 }
 

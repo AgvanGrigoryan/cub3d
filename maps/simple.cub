@@ -1,6 +1,6 @@
-NO ./textures/bluestone.xpm
-WE ./textures/eagle.xpm
-SO ./textures/greystone.xpm
+NO ./textures/redbrick.xpm
+WE ./textures/redbrick.xpm
+SO ./textures/redbrick.xpm
 EA ./textures/redbrick.xpm
 
 C 135,206,235
