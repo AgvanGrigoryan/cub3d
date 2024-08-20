@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/10 15:05:03 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:14:49 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ strerror, exit, math functions
 
 # define FN_MIN_LEN 4
 # define FN_EXT ".cub"
+
+# define TEXS_CNT 4
 
 # define WIN_W 1080
 # define WIN_H 920

@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/10 14:47:09 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:38:31 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,21 @@ void	set_player_dir(char pl_dir, t_player *pl)
 	{
 		pl->dirX = -1;
 		pl->planeX = -0.66;
-		printf("W\n");
 	}
 	else if (pl_dir == 'E')
 	{
 		pl->dirX = 1;
 		pl->planeX = 0.90;
-		printf("E\n");
 	}
 	else if (pl_dir == 'S')
 	{
 		pl->dirY = -1;
 		pl->planeY = -0.66;
-		printf("S\n");
 	}
 	else if (pl_dir == 'N')
 	{
 		pl->dirY = 1;
 		pl->planeY = 0.66;
-		printf("N\n");
 	}
 }
 

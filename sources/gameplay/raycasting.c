@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/10 14:47:57 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:49:19 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int	draw_scene(t_game_info *game)
 	// 	for (int j = 0; j < WIN_W; j++)
 	// 		my_mlx_pixel_put(&game->img, j, i, game->texs.flr);
 	draw_mini_map(game);
-	draw_player(game);
 	// raycasting(game);
-	// printf("PLAYER POSITION:\nX:%lf Y:%lf\n", game->pl.posX, game->pl.posY);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	my_mlx_image_clear(&game->img);
 	return (0);
@@ -42,17 +40,29 @@ int	draw_scene(t_game_info *game)
 
 void	draw_player(t_game_info *game)
 {
-	draw_square(&game->img, (CELL_SZ * game->pl.posY) + 1,( CELL_SZ * game->pl.posX) + 1, CELL_SZ - 2, create_trgb(0, 250, 102, 0));
+	int	line_len = 50;
+	draw_square(&game->img, (CELL_SZ * game->pl.posY) + 1,( CELL_SZ * game->pl.posX) + 1, CELL_SZ - 2, create_trgb(0, 102, 153, 153));
 	// draw_square(&game->img, CELL_SZ * game->pl.posY + 1, CELL_SZ * game->pl.posX + 1, CELL_SZ, create_trgb(0, 204, 102, 0));
 	double x1, y1, x2, y2;
 	x1 = (CELL_SZ * game->pl.posY) + (CELL_SZ / 2.0);
 	y1 = (CELL_SZ * game->pl.posX) + (CELL_SZ / 2.0);
-	x2 = x1 + (game->pl.dirX * 30);
-	y2 = y1 + (game->pl.dirY * 30);
-	// // x2 = x1 + game->pl.dirX;
-	// // y2 = y1 + game->pl.dirY;
-	draw_line(x1, y1, x2, y2, create_trgb(0, 255, 100, 0), &game->img);
-	printf("X:%lf Y:%lf\nX:%lf Y:%lf New\n", x1, y1, x2, y2);
+
+	// Rotate the direction vector to the left by 66 degrees
+	double leftDirX = game->pl.dirX * cos(0.66) - game->pl.dirY * sin(0.66);
+	double leftDirY = game->pl.dirX * sin(0.66) + game->pl.dirY * cos(0.66);
+
+	// Rotate the direction vector to the right by 66 degrees
+	double rightDirX = game->pl.dirX * cos(-0.66) - game->pl.dirY * sin(-0.66);
+	double rightDirY = game->pl.dirX * sin(-0.66) + game->pl.dirY * cos(-0.66);
+	x2 = x1 + (leftDirX * line_len);
+	y2 = y1 + (leftDirY * line_len);
+	draw_line(x1, y1, x2, y2, create_trgb(0, 0, 102, 255), &game->img);
+	x2 = x1 + (rightDirX * line_len);
+	y2 = y1 + (rightDirY * line_len);
+	draw_line(x1, y1, x2, y2, create_trgb(0, 0, 102, 255), &game->img);
+	draw_line(x2, y2, x1 + (leftDirX * line_len), y1 + (leftDirY * line_len), create_trgb(0, 0, 102, 255), &game->img);
+	draw_line(x1, y1, x1 + (game->pl.dirX * (50 / 2) / tan(0.66 / 2)), y1 + (game->pl.dirY * (50 / 2) / tan(0.66 / 2)), create_trgb(0, 255, 0, 0), &game->img);
+
 }
 
 void	draw_mini_map(t_game_info *game)
@@ -77,18 +87,21 @@ void	draw_mini_map(t_game_info *game)
 			
 			if (map[i].val[j] == '1')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0,204, 255, 204));
-			else if (map[i].val[j] == '0')
-				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 255, 255, 255));
 			else if (map[i].val[j] == ' ')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 33, 33, 33));
 			else if (map[i].val[j] == 'D')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 100, 100, 255));
+			else if (map[i].val[j] == '0' || (map[i].val[j] == 'W' || map[i].val[j] == 'N'
+				|| map[i].val[j] == 'S' || map[i].val[j] == 'E'))
+				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 255, 255, 255));
 			j++;
 		}
 		i++;
 	}
+	draw_player(game);
 }
 
+/*
 void	raycasting(t_game_info *game)
 {	
 	// init variables for loop of wall raycasting
@@ -111,7 +124,6 @@ void	raycasting(t_game_info *game)
 		deltaDistY = ternard(rayDirY == 0, 1e30, fabs(1 / rayDirY));
 
 		//calculate step and initaial sideDist
-		int side;  //was a NS or a EW wall hit?
 		int stepX, stepY; //what direction to step in x or y-direction (either +1 or -1)
 		double sideDistX, sideDistY;
 		if(rayDirX < 0)
@@ -134,9 +146,9 @@ void	raycasting(t_game_info *game)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - game->pl.posY) * deltaDistY;
 		}
-
 		// perform DDA
 		int hit;
+		int side;  //was a NS or a EW wall hit?
 
 		hit = 0;
 		while (hit == 0)
@@ -159,10 +171,36 @@ void	raycasting(t_game_info *game)
 			if(game->map[mapX].val[mapY] > 0)
 				hit = 1;
 		}
+		double perpWallDist;
+		//Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
+		if(side == 0)
+			perpWallDist = (sideDistX - deltaDistX);
+		else
+			perpWallDist = (sideDistY - deltaDistY);
+		
+		int lineHeight = (int)(WIN_H / perpWallDist);
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStart = -lineHeight / 2 + WIN_H / 2;
+		if(drawStart < 0) drawStart = 0;
+		int drawEnd = lineHeight / 2 + WIN_H / 2;
+		if(drawEnd >= WIN_H) drawEnd = WIN_H - 1;
+
+		int texNum = (game->map[mapX].val[mapY] - 48) - 1; //1 subtracted from it so that texture 0 can be used!
+
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if (side == 0) wallX = game->pl.posY + perpWallDist * rayDirY;
+		else           wallX = game->pl.posX + perpWallDist * rayDirX;
+		wallX -= floor((wallX));
+	
+		//x coordinate on the texture
+		int texX = (int) (wallX * (double) texWidth);
+		if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+		if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
 		x++;
 	}
 }
-
+*/
 void draw_line(int x0, int y0, int x1, int y1, int color, t_img *img)
 {
 	
