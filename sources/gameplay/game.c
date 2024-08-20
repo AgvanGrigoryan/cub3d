@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/12 14:25:44 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:27:05 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ int	destroy_texs_imgs(void *mlx, t_texs *texs)
 	return (0);
 }
 
-int	check_texs_img(void *mlx, t_texs *texs)
+int	check_texs_img(t_texs *texs)
 {
 	int		total_width;
 	int		total_height;
-	bool	are_same_size;
 
 	if (texs->ea.img == NULL || texs->no.img == NULL
 		|| texs->so.img == NULL || texs->we.img == NULL)
@@ -70,7 +69,7 @@ int	init_textures_img(t_game_info *game, t_scene_info *sc_info)
 			get_value(sc_info->texs, "WE"),
 			&game->texs.we.w, &game->texs.we.h);
 	// add to states of doors and sprite textures
-	if (check_texs_img(game->mlx, &game->texs) == -1)
+	if (check_texs_img(&game->texs) == -1)
 		return (destroy_texs_imgs(game->mlx, &game->texs));
 	return (0);
 }
@@ -95,7 +94,7 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 	if (init_textures_img(game, sc_info) == -1)
 		return (-1);
 	if (init_flr_clg_colors(game, sc_info) == -1)
-		return (destroy_texs_imgs(game->mlx, &game->img), -1);
+		return (destroy_texs_imgs(game->mlx, &game->texs), -1);
 	init_player_info(game->map, &game->pl);
 	game->img.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	if (game->img.img == NULL)
@@ -104,7 +103,7 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 			&game->img.line_len, &game->img.endian);
 	if (game->img.addr == NULL)
 		return (mlx_destroy_image(game->mlx, game->img.img),
-				destroy_texs_imgs(game->mlx, &game->img), -1); // or call function and do this and other cleaning actions in that function
+				destroy_texs_imgs(game->mlx, &game->texs), -1); // or call function and do this and other cleaning actions in that function
 	return (0);
 }
 

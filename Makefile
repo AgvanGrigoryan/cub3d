@@ -60,12 +60,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)/validation
 	@mkdir -p $(OBJS_DIR)/gameplay
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "Compiling $<: ["
-	@for i in {1..30}; do \
-		printf "#"; \
-		sleep 0.005; \
-	done; \
-	printf "]\n";
 
 # Cleaning
 clean:
