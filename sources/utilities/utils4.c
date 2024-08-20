@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 21:03:29 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:11:10 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	set_player_pos(t_line *map, t_player *pl)
 	}
 }
 
-int	movement(int key, t_game_info *game)
+int	key_hook(int key, t_game_info *game)
 {
+	if (key == ESC_KEYCODE)
+		close_game(game);
 	if (key == LEFT_ARROW_KEYCODE
 		|| key == RIGHT_ARROW_KEYCODE)
 		rotate_view(key, &game->pl);

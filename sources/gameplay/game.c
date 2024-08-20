@@ -6,17 +6,17 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 16:30:06 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:04:38 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 
-int	close_game(t_game_info *info)
+int	close_game(t_game_info *game)
 {
-	mlx_clear_window(info->mlx, info->win);
-	mlx_destroy_window(info->mlx, info->win);
+	mlx_clear_window(game->mlx, game->win);
+	mlx_destroy_window(game->mlx, game->win);
 	exit (0);
 }
 
@@ -88,8 +88,9 @@ int	init_flr_clg_colors(t_game_info *game, t_scene_info *sc_info)
 }
 void	init_player_info(t_line *map, t_player *pl)
 {
-	set_player_pos(map, pl);  
+	set_player_pos(map, pl);
 	set_player_dir(map[(int)pl->posX].val[(int)pl->posY], pl);
+	map[(int)pl->posX].val[(int)pl->posY] = '0';
 }
 
 int	game_init(t_game_info *game, t_scene_info *sc_info)
@@ -127,7 +128,7 @@ int	game_start(t_scene_info *sc_info)
 	if (game_init(game, sc_info) == -1)
 		return (-1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
-	mlx_hook(game->win, 2, 0, movement, game);
+	mlx_hook(game->win, 2, 0, key_hook, game);
 	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 	return (0);

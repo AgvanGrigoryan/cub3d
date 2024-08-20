@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/16 22:14:49 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:04:43 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ strerror, exit, math functions
 # define S_KEYCODE 1
 # define D_KEYCODE 2
 # define W_KEYCODE 13
+# define ESC_KEYCODE 53
 # define LEFT_ARROW_KEYCODE 123
 # define RIGHT_ARROW_KEYCODE 124
 
@@ -137,7 +138,7 @@ typedef struct s_dyn_arr
 // main.c
 
 // game.c
-int				close_game(t_game_info *info);
+int				close_game(t_game_info *game);
 int				init_textures_img(t_game_info *game, t_scene_info *sc_info);
 void			init_player_info(t_line *map, t_player *pl);
 int				game_init(t_game_info *game, t_scene_info *sc_info);
@@ -199,7 +200,7 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 double			ternard(int condition, double yes, double no);
 void			set_player_dir(char pl_dir, t_player *pl);
 void			set_player_pos(t_line *map, t_player *pl);
-int				movement(int key, t_game_info *game);
+int				key_hook(int key, t_game_info *game);
 void			my_mlx_image_clear(t_img *img);
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
