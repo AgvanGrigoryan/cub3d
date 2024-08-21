@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/21 18:21:50 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:53:54 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ strerror, exit, math functions
 # define S_KEYCODE 1
 # define D_KEYCODE 2
 # define W_KEYCODE 13
+# define M_KEYCODE 46
 # define ESC_KEYCODE 53
 # define SHIFT_KEYCODE 257
 # define LEFT_ARR 123
@@ -116,11 +117,13 @@ typedef struct s_player
 	double	planeX;
 	double	planeY;
 	double	walk_speed;
+	int		can_run;
 }	t_player;
 
 typedef struct s_game_info
 {
-	int				can_run;
+	int				is_map_mini;
+	double			map_rad;
 	void			*mlx;
 	void			*win;
 	t_line			*map;
@@ -211,6 +214,10 @@ void			set_player_dir(char pl_dir, t_player *pl);
 void			set_player_pos(t_line *map, t_player *pl);
 int				key_hook(int key, t_game_info *game);
 void			my_mlx_image_clear(t_img *img);
+
+// utils4.c
+int				key_down_hook(int keycode, t_game_info *game);
+
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
 int				pop(t_dyn_arr *arr, int index);

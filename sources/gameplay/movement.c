@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 18:21:41 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:27:40 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	move_ahead(t_line *map, t_player *pl)
 {
 	double	x;
 	double	y;
-
+	if (pl->can_run == 0)
+		pl->can_run = 1;
 	x = pl->posX + pl->dirX * pl->walk_speed;
 	y = pl->posY;
 	if (map[(int)x].val[(int)y] != '1')

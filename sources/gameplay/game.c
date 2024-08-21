@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 18:46:14 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:54:05 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	init_player_info(t_line *map, t_player *pl)
 
 int	game_init(t_game_info *game, t_scene_info *sc_info)
 {
-	game->can_run = 0;
+	game->pl.can_run = 0;
+	game->map_rad = 5.0;
+	game->is_map_mini = 1;
 	game->pl.walk_speed = 0.2;
 	game->map = sc_info->map;
 	if (init_textures_img(game, sc_info) == -1)
@@ -111,19 +113,6 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 	if (game->img.addr == NULL)
 		return (mlx_destroy_image(game->mlx, game->img.img),
 				destroy_texs_imgs(game->mlx, &game->texs), -1); // or call function and do this and other cleaning actions in that function
-	return (0);
-}
-
-int key_down_hook(int keycode, t_game_info *game)
-{
-	if (keycode == SHIFT_KEYCODE)
-	{
-		if (game->can_run == 2)
-			game->pl.walk_speed /= 2.0;
-		game->can_run = 0;
-	}
-	if (keycode == W_KEYCODE)
-		game->can_run = 0;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 18:42:53 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:38:53 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,24 @@ int	key_hook(int key, t_game_info *game)
 	if (key == LEFT_ARR || key == RIGHT_ARR)
 		rotate_view(key, &game->pl, ROT_SPEED);
 	if (key == W_KEYCODE)
-	{
-		if (game->can_run == 0)
-			game->can_run = 1;
 		move_ahead(game->map, &game->pl);
-	}
 	if (key == S_KEYCODE)
 		move_back(game->map, &game->pl);
 	if (key == A_KEYCODE)
 		move_left(game->map, &game->pl);
 	if (key == D_KEYCODE)
 		move_right(game->map, &game->pl);
-	if (key == SHIFT_KEYCODE && game->can_run == 1)
+	if (key == SHIFT_KEYCODE && game->pl.can_run == 1)
 	{
 		game->pl.walk_speed *= 2.0;
-		game->can_run = 2;
+		game->pl.can_run = 2;
+	}
+	if (key == M_KEYCODE)
+	{
+		game->map_rad = 5;
+		if (game->is_map_mini)
+			game->map_rad *= 1000;
+		game->is_map_mini = !game->is_map_mini;
 	}
 	return (key);
 }

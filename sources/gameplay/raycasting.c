@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 15:22:11 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 22:14:36 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void 	draw_line(int x0, int y0, int x1, int y1, int color, t_img *img);
 void	draw_square(t_img *img, int x1, int y1, int size, int color);
 void	draw_mini_map(t_game_info *game);
-void	draw_player(t_game_info *game);
+void	draw_player(t_game_info *game, double s_i, double s_j);
 
 # define CELL_SZ 25
 
@@ -47,13 +47,13 @@ int	draw_scene(t_game_info *game)
 	return (0);
 }
 
-void	draw_player(t_game_info *game)
+void	draw_player(t_game_info *game, double s_i, double s_j)
 {
-	int	line_len = 50;
-	draw_square(&game->img, CELL_SZ * (game->pl.posY-0.25), CELL_SZ * (game->pl.posX - 0.25), CELL_SZ / 2, create_trgb(0, 102, 153, 153));
+	int	line_len = 30;
 	double x1, y1, x2, y2;
-	x1 = (CELL_SZ * game->pl.posY);
-	y1 = (CELL_SZ * game->pl.posX);
+	x1 = (CELL_SZ * game->pl.posY) - (s_j * CELL_SZ);
+	y1 = (CELL_SZ * game->pl.posX) - (s_i * CELL_SZ);
+	draw_square(&game->img, x1 - CELL_SZ / 4, y1 - CELL_SZ / 4, CELL_SZ / 2, create_trgb(0, 102, 153, 153));
 	x2 = x1 + (game->pl.dirY * line_len);
 	y2 = y1 + (game->pl.dirX * line_len);
 	draw_line(x1, y1, x2, y2, create_trgb(0, 255, 0, 0), &game->img);
@@ -77,35 +77,42 @@ void	draw_mini_map(t_game_info *game)
 	t_line *map;
 
 	map = game->map;
-	int		i;
-	int		j;
-	int		x1;
-	int		y1;
+	int	i;
+	int	j;
+	double		x1;
+	double		y1;
 
-	i = 0;
-	while (map[i].val != NULL)
+	i = 0.0;
+	if (game->pl.posX - game->map_rad > 0)
+		i = game->pl.posX - game->map_rad;
+	double s_i = i;
+	j = 0.0;
+	if (game->pl.posY - game->map_rad > 0)
+		j = game->pl.posY - game->map_rad;
+	double s_j = j;
+	while (map[i].val != NULL && i < s_i + 2 * game->map_rad)
 	{
-		j = 0;
-		while (map[i].val[j] != '\0')
+		j = s_j;
+		while (map[i].val[j] != '\0' && j <  s_j + 2 * game->map_rad)
 		{
 			// horizontal
-			x1 = CELL_SZ * j;
-			y1 = CELL_SZ * i;
+			x1 = CELL_SZ * (j - s_j);
+			y1 = CELL_SZ * (i - s_i);
 			
 			if (map[i].val[j] == '1')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0,204, 255, 204));
-			else if (map[i].val[j] == ' ')
-				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 33, 33, 33));
 			else if (map[i].val[j] == 'D')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 100, 100, 255));
 			else if (map[i].val[j] == '0' || (map[i].val[j] == 'W' || map[i].val[j] == 'N'
 				|| map[i].val[j] == 'S' || map[i].val[j] == 'E'))
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 255, 255, 255));
+			else if (map[i].val[j] == ' ')
+				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 33, 33, 33));
 			j++;
 		}
 		i++;
 	}
-	draw_player(game);
+	draw_player(game, s_i, s_j);
 }
 
 char *getTexture(t_game_info *game, int hit, int side, int rayDirX, int rayDirY) {
