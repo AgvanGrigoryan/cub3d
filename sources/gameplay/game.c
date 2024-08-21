@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 14:05:47 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:46:14 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	init_player_info(t_line *map, t_player *pl)
 
 int	game_init(t_game_info *game, t_scene_info *sc_info)
 {
+	game->can_run = 0;
+	game->pl.walk_speed = 0.2;
 	game->map = sc_info->map;
 	if (init_textures_img(game, sc_info) == -1)
 		return (-1);
@@ -109,6 +111,19 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 	if (game->img.addr == NULL)
 		return (mlx_destroy_image(game->mlx, game->img.img),
 				destroy_texs_imgs(game->mlx, &game->texs), -1); // or call function and do this and other cleaning actions in that function
+	return (0);
+}
+
+int key_down_hook(int keycode, t_game_info *game)
+{
+	if (keycode == SHIFT_KEYCODE)
+	{
+		if (game->can_run == 2)
+			game->pl.walk_speed /= 2.0;
+		game->can_run = 0;
+	}
+	if (keycode == W_KEYCODE)
+		game->can_run = 0;
 	return (0);
 }
 
@@ -129,6 +144,8 @@ int	game_start(t_scene_info *sc_info)
 		return (-1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
 	mlx_hook(game->win, 2, 0, key_hook, game);
+	mlx_hook(game->win, 3, 0, key_down_hook, game);
+	mlx_hook(game->win, 6, 0, mouse_move, game);
 	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 	return (0);

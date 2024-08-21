@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/21 01:00:07 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:21:50 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,18 @@ strerror, exit, math functions
 # define WIN_H 920
 
 # define ROT_SPEED 0.1
-# define WALK_SPEED 0.2
+# define MOUSE_ROT_SPEED 0.007
+
 // KEYCODES
 # define A_KEYCODE 0
 # define S_KEYCODE 1
 # define D_KEYCODE 2
 # define W_KEYCODE 13
 # define ESC_KEYCODE 53
-# define LEFT_ARROW_KEYCODE 123
-# define RIGHT_ARROW_KEYCODE 124
+# define SHIFT_KEYCODE 257
+# define LEFT_ARR 123
+# define RIGHT_ARR 124
+
 
 typedef struct s_line
 {
@@ -112,11 +115,12 @@ typedef struct s_player
 	double	dirY;
 	double	planeX;
 	double	planeY;
+	double	walk_speed;
 }	t_player;
 
 typedef struct s_game_info
 {
-	
+	int				can_run;
 	void			*mlx;
 	void			*win;
 	t_line			*map;
@@ -149,7 +153,8 @@ int				draw_scene(t_game_info *game);
 void			raycasting();
 
 // movement.c
-void			rotate_view(int keycode, t_player *pl);
+int				mouse_move(int x, int y, t_game_info *game);
+void			rotate_view(int keycode, t_player *pl, double rot_angle);
 void			move_left(t_line *map, t_player *pl);
 void			move_right(t_line *map, t_player *pl);
 void			move_back(t_line *map, t_player *pl);

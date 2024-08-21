@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 01:25:39 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:42:53 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,25 @@ int	key_hook(int key, t_game_info *game)
 {
 	if (key == ESC_KEYCODE)
 		close_game(game);
-	if (key == LEFT_ARROW_KEYCODE
-		|| key == RIGHT_ARROW_KEYCODE)
-		rotate_view(key, &game->pl);
+	if (key == LEFT_ARR || key == RIGHT_ARR)
+		rotate_view(key, &game->pl, ROT_SPEED);
 	if (key == W_KEYCODE)
+	{
+		if (game->can_run == 0)
+			game->can_run = 1;
 		move_ahead(game->map, &game->pl);
+	}
 	if (key == S_KEYCODE)
 		move_back(game->map, &game->pl);
 	if (key == A_KEYCODE)
 		move_left(game->map, &game->pl);
 	if (key == D_KEYCODE)
 		move_right(game->map, &game->pl);
+	if (key == SHIFT_KEYCODE && game->can_run == 1)
+	{
+		game->pl.walk_speed *= 2.0;
+		game->can_run = 2;
+	}
 	return (key);
 }
 
