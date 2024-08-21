@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/20 21:35:49 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:22:11 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ void	draw_player(t_game_info *game);
 
 # define CELL_SZ 25
 
+void	draw_clg_and_flr(t_game_info *game)
+{
+	for (int i = 0; i < WIN_H / 2; i++)
+		for (int j = 0; j < WIN_W; j++)
+			my_mlx_pixel_put(&game->img, j, i, game->texs.clg);
+	for (int i = WIN_H / 2; i < WIN_H; i++)
+		for (int j = 0; j < WIN_W; j++)
+			my_mlx_pixel_put(&game->img, j, i, game->texs.flr);
+}
+
 int	draw_scene(t_game_info *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-
-	// draw_clg_and_flr();
+	draw_clg_and_flr(game);
 	for (int i = 0; i < WIN_H / 2; i++)
 		for (int j = 0; j < WIN_W; j++)
 			my_mlx_pixel_put(&game->img, j, i, game->texs.clg);
@@ -41,8 +50,7 @@ int	draw_scene(t_game_info *game)
 void	draw_player(t_game_info *game)
 {
 	int	line_len = 50;
-	draw_square(&game->img, CELL_SZ * (game->pl.posY-0.5), CELL_SZ * (game->pl.posX - 0.5), CELL_SZ - 2, create_trgb(0, 102, 153, 153));
-	// draw_square(&game->img, CELL_SZ * game->pl.posY + 1, CELL_SZ * game->pl.posX + 1, CELL_SZ, create_trgb(0, 204, 102, 0));
+	draw_square(&game->img, CELL_SZ * (game->pl.posY-0.25), CELL_SZ * (game->pl.posX - 0.25), CELL_SZ / 2, create_trgb(0, 102, 153, 153));
 	double x1, y1, x2, y2;
 	x1 = (CELL_SZ * game->pl.posY);
 	y1 = (CELL_SZ * game->pl.posX);
@@ -61,10 +69,7 @@ void	draw_player(t_game_info *game)
 	x2 = x1 + (rightDirY * line_len);
 	y2 = y1 + (rightDirX * line_len);
 	draw_line(x1, y1, x2, y2, create_trgb(0, 0, 102, 255), &game->img);
-	// draw_line(x1, y1, x2, y2, create_trgb(0, 255, 0, 0), &game->img);
 	draw_line(x2, y2, x1 + (leftDirY * line_len), y1 + (leftDirX * line_len), create_trgb(0, 0, 255, 0), &game->img);
-	// draw_line(x1, y1, x1 + (game->pl.dirX * (50 / 2) / tan(0.66 / 2)), y1 + (game->pl.dirY * (50 / 2) / tan(0.66 / 2)), create_trgb(0, 255, 0, 0), &game->img);
-
 }
 
 void	draw_mini_map(t_game_info *game)
@@ -103,7 +108,7 @@ void	draw_mini_map(t_game_info *game)
 	draw_player(game);
 }
 
-char	*getTexture(t_game_info *game, int hit, int side, int rayDirX, int rayDirY) {
+char *getTexture(t_game_info *game, int hit, int side, int rayDirX, int rayDirY) {
 
 	// if (hit == 2)
 	// 	return (&vars->cdoor);
@@ -119,8 +124,7 @@ char	*getTexture(t_game_info *game, int hit, int side, int rayDirX, int rayDirY)
 }
 
 void	raycasting(t_game_info *game)
-{	
-	double ZBuffer[WIN_W];
+{
 	// init variables for loop of wall raycasting
 	int x;
 	int mapX, mapY;
@@ -130,97 +134,92 @@ void	raycasting(t_game_info *game)
 	x = 0;
 	while (x < WIN_W)
 	{
-		double cameraX = 2 * x / (double)WIN_W - 1; //x-coordinate in camera space
-      double rayDirX = game->pl.dirX + game->pl.planeX * cameraX;
-      double rayDirY = game->pl.dirY + game->pl.planeY * cameraX;
+		mapX = (int) game->pl.posX;
+		mapY = (int) game->pl.posY;
 
-      //which box of the map we're in
-      int mapX = (int)game->pl.posX;
-      int mapY = (int)game->pl.posY;
+		cameraX = 2 * x / (double)WIN_W - 1;
+		rayDirX = game->pl.dirX + game->pl.planeX * cameraX;
+		rayDirY = game->pl.dirY + game->pl.planeY * cameraX;
+		
+		deltaDistX = ternard(rayDirX == 0, 1e30, fabs(1 / rayDirX));
+		deltaDistY = ternard(rayDirY == 0, 1e30, fabs(1 / rayDirY));
 
-      //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+		//calculate step and initaial sideDist
+		int stepX, stepY; //what direction to step in x or y-direction (either +1 or -1)
+		double sideDistX, sideDistY;
+		if(rayDirX < 0)
+		{
+			stepX = -1;
+			sideDistX = (game->pl.posX - mapX) * deltaDistX;
+		}
+		else
+		{
+			stepX = 1;
+			sideDistX = (mapX + 1.0 - game->pl.posX) * deltaDistX;
+		}
+		if(rayDirY < 0)
+		{
+			stepY = -1;
+			sideDistY = (game->pl.posY - mapY) * deltaDistY;
+		}
+		else
+		{
+			stepY = 1;
+			sideDistY = (mapY + 1.0 - game->pl.posY) * deltaDistY;
+		}
+		// perform DDA
+		int hit;
+		int side;  //was a NS or a EW wall hit?
 
-      //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-      double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
-      double perpWallDist;
+		hit = 0;
+		while (hit == 0)
+		{
+			//jump to next map square, either in x-direction, or in y-direction
+			if(sideDistX < sideDistY)
+			{
+				sideDistX += deltaDistX;
+				mapX += stepX;
+				side = 0;
+			}
+			else
+			{
+				sideDistY += deltaDistY;
+				mapY += stepY;
+				side = 1;
+			}
+			//Check if ray has hit a wall
+			// CHECK are mapX and mapY in the correct range(0 < mapX/mapY < size) AND on map[mapX] is greather elements than mapY
+			if(game->map[mapX].val[mapY] == '1')
+				hit = 1;
+		}
+		double perpWallDist;
+		//Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
+		if(side == 0)
+			perpWallDist = (sideDistX - deltaDistX);
+		else
+			perpWallDist = (sideDistY - deltaDistY);
+		
+		int lineHeight = (int)(WIN_H / perpWallDist);
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStart = -lineHeight / 2 + WIN_H / 2;
+		if(drawStart < 0) drawStart = 0;
+		int drawEnd = lineHeight / 2 + WIN_H / 2;
+		if(drawEnd >= WIN_H) drawEnd = WIN_H - 1;
 
-      //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
+		int texNum = (game->map[mapX].val[mapY] - 48) - 1; //1 subtracted from it so that texture 0 can be used!
 
-      int hit = 0; //was there a wall hit?
-      int side; //was a NS or a EW wall hit?
-
-      //calculate step and initial sideDist
-      if(rayDirX < 0)
-      {
-        stepX = -1;
-        sideDistX = (game->pl.posX - mapX) * deltaDistX;
-      }
-      else
-      {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - game->pl.posX) * deltaDistX;
-      }
-      if(rayDirY < 0)
-      {
-        stepY = -1;
-        sideDistY = (game->pl.posY - mapY) * deltaDistY;
-      }
-      else
-      {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - game->pl.posY) * deltaDistY;
-      }
-      //perform DDA
-      while (hit == 0)
-      {
-        //jump to next map square, either in x-direction, or in y-direction
-        if(sideDistX < sideDistY)
-        {
-          sideDistX += deltaDistX;
-          mapX += stepX;
-          side = 0;
-        }
-        else
-        {
-          sideDistY += deltaDistY;
-          mapY += stepY;
-          side = 1;
-        }
-        //Check if ray has hit a wall
-        if(game->map[mapX].val[mapY] != '0')
-			hit = 1;
-      }
-
-      //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
-      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-      else          perpWallDist = (sideDistY - deltaDistY);
-
-      //Calculate height of line to draw on screen
-      int lineHeight = (int)(WIN_H / perpWallDist);
-
-      //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + WIN_H / 2;
-      if(drawStart < 0) drawStart = 0;
-      int drawEnd = lineHeight / 2 + WIN_H / 2;
-      if(drawEnd >= WIN_H) drawEnd = WIN_H - 1;
-      //texturing calculations
-      int texNum = game->map[mapX].val[mapY] - 1; //1 subtracted from it so that texture 0 can be used!
-
-      //calculate value of wallX
-      double wallX; //where exactly the wall was hit
-      if (side == 0) wallX = game->pl.posY + perpWallDist * rayDirY;
-      else           wallX = game->pl.posX + perpWallDist * rayDirX;
-      wallX -= floor((wallX));
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if (side == 0) wallX = game->pl.posY + perpWallDist * rayDirY;
+		else           wallX = game->pl.posX + perpWallDist * rayDirX;
+		wallX -= floor((wallX));
 
       //x coordinate on the texture
-      int texX = (int)(wallX * (double)game->texs.ea.w);
-      if(side == 0 && rayDirX > 0) texX = game->texs.ea.w - texX - 1;
-      if(side == 1 && rayDirY < 0) texX = game->texs.ea.w - texX - 1;
+		int texX = (int)(wallX * (double)game->texs.ea.w);
+		if(side == 0 && rayDirX > 0)
+			texX = game->texs.ea.w - texX - 1;
+		if(side == 1 && rayDirY < 0)
+			texX =	game->texs.ea.w - texX - 1;
 
       // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
       // How much to increase the texture coordinate per screen pixel
@@ -233,14 +232,13 @@ void	raycasting(t_game_info *game)
 	{
 		int texY = (int)texPos & (game->texs.ea.w - 1);
 		texPos += step;
-		int color = getTexture(game, hit, side, rayDirX, rayDirY)[game->texs.ea.h * texY + texX];
-		// int color = create_trgb(0, 100, 200, 100);
+		int color = *(((unsigned int *)getTexture(game, hit, side, rayDirX, rayDirY)) + (game->texs.ea.h * texY + texX));
+
 		if(side == 1)
 			color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(&game->img, x, y, color);
 	}
-	  ZBuffer[x] = perpWallDist;
-		x++;
+	x++;
 	}
 }
 

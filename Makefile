@@ -1,5 +1,5 @@
 # Project name
-NAME = cub3d
+NAME = cub3D
 
 # Readline name
 READLINE = readline
