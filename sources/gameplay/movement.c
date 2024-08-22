@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/22 13:41:57 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:05:35 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -102,11 +102,7 @@ int	mouse_move(int x, int y, t_game_info *game)
 	(void) y;
 	static int	prev_x;
 	double		rot_angle;
-	double	oldDirX;
-	double	oldPlaneX;
 
-	oldDirX = game->pl.dirX;
-	oldPlaneX = game->pl.planeX;
 	rot_angle = (double)(abs(x - prev_x) * MOUSE_ROT_SPEED);
 	if(x > prev_x)
 		rotate_view(RIGHT_ARR, &game->pl, rot_angle);

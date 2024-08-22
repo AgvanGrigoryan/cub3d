@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/22 13:48:27 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:58:54 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "mlx.h"
@@ -44,12 +44,12 @@ int	check_texs_img(t_texs *texs)
 	int		total_height;
 
 	if (texs->ea.img == NULL || texs->no.img == NULL
-		|| texs->so.img == NULL || texs->we.img == NULL)
+		|| texs->so.img == NULL || texs->we.img == NULL || texs->dopen.img == NULL || texs->dclose.img == NULL)
 		return (pred("XPM_FILE_TO_IMG failed\n", BOLD, 2), -1);
-	total_height = texs->ea.h + texs->no.h + texs->so.h + texs->we.h;
-	total_width = texs->ea.w + texs->no.w + texs->so.w + texs->we.w;
+	total_height = texs->ea.h + texs->no.h + texs->so.h + texs->we.h + texs->dopen.h + texs->dclose.h;
+	total_width = texs->ea.w + texs->no.w + texs->so.w + texs->we.w + texs->dopen.w + texs->dclose.w;
 	if ((total_height / TEXS_CNT) != texs->ea.h
-		|| (total_width / TEXS_CNT != texs->ea.w))
+		|| (total_width / TEXS_CNT) != texs->ea.w)
 		return (pred("Texs sizes are different\n", BOLD, 2), -1);
 	return (0);
 }
@@ -70,10 +70,10 @@ int	init_textures_img(t_game_info *game, t_scene_info *sc_info)
 			&game->texs.we.w, &game->texs.we.h);
 	game->texs.dopen.img = mlx_xpm_file_to_image(game->mlx,
 			get_value(sc_info->texs, "DO"),
-			&game->texs.we.w, &game->texs.we.h);
+			&game->texs.dopen.w, &game->texs.dopen.h);
 	game->texs.dclose.img = mlx_xpm_file_to_image(game->mlx,
 			get_value(sc_info->texs, "DC"),
-			&game->texs.we.w, &game->texs.we.h);
+			&game->texs.dclose.w, &game->texs.dclose.h);
 	// add to states of doors and sprite textures
 	if (check_texs_img(&game->texs) == -1)
 		return (destroy_texs_imgs(game->mlx, &game->texs), -1);
