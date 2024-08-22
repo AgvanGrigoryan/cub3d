@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/07 15:37:30 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:50:33 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ int	init_texs_struct(t_scene_info *sc_info)
 	int	i;
 
 	i = 0;
-	sc_info->texs = malloc(sizeof(t_key_value) * 7);
+	sc_info->texs = malloc(sizeof(t_key_value) * 9);
 	if (sc_info == NULL)
 		return (perror("INIT_TEXTURES"), -1);
 	sc_info->texs[0].key = "NO";
 	sc_info->texs[1].key = "SO";
 	sc_info->texs[2].key = "EA";
 	sc_info->texs[3].key = "WE";
-	sc_info->texs[4].key = "C";
-	sc_info->texs[5].key = "F";
-	sc_info->texs[6].key = NULL;
-	while (i < 7)
+	sc_info->texs[4].key = "DO";
+	sc_info->texs[5].key = "DC";
+	sc_info->texs[6].key = "C";
+	sc_info->texs[7].key = "F";
+	sc_info->texs[8].key = NULL;
+	while (i < 9)
 		sc_info->texs[i++].value = NULL;
 	return (0);
 }

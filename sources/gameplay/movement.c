@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 21:27:40 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:41:57 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	move_ahead(t_line *map, t_player *pl)
 
 int	mouse_move(int x, int y, t_game_info *game)
 {
+	(void) y;
 	static int	prev_x;
 	double		rot_angle;
 	double	oldDirX;

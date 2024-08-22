@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 22:14:36 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:56:36 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	draw_scene(t_game_info *game)
 		for (int j = 0; j < WIN_W; j++)
 			my_mlx_pixel_put(&game->img, j, i, game->texs.flr);
 	raycasting(game);
-	draw_mini_map(game);
+	// draw_mini_map(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	my_mlx_image_clear(&game->img);
 	return (0);
@@ -116,16 +116,16 @@ void	draw_mini_map(t_game_info *game)
 }
 
 char *getTexture(t_game_info *game, int hit, int side, int rayDirX, int rayDirY) {
-
-	// if (hit == 2)
-	// 	return (&vars->cdoor);
-	// else if (vars->ray.hit == 3)
-	// 	return (&vars->odoor);
+	// printf("hit - %d\n", hit);
+	if (hit == 2)
+		return (game->texs.dopen.addr);
+	if (hit == 3)
+		return (game->texs.dclose.addr);
 	if (side == 1 && rayDirY <= 0)
 		return (game->texs.no.addr);
-	else if (side == 0 && rayDirX > 0)
+	if (side == 0 && rayDirX > 0)
 		return (game->texs.so.addr);
-	else if (side == 0 && rayDirX <= 0)
+	if (side == 0 && rayDirX <= 0)
 		return (game->texs.ea.addr);
 	return (game->texs.we.addr);
 }
@@ -196,8 +196,10 @@ void	raycasting(t_game_info *game)
 			}
 			//Check if ray has hit a wall
 			// CHECK are mapX and mapY in the correct range(0 < mapX/mapY < size) AND on map[mapX] is greather elements than mapY
-			if(game->map[mapX].val[mapY] == '1')
+			if (game->map[mapX].val[mapY] == '1')
 				hit = 1;
+			else if (game->map[mapX].val[mapY] == 'D')
+				hit = 3;
 		}
 		double perpWallDist;
 		//Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
@@ -213,7 +215,7 @@ void	raycasting(t_game_info *game)
 		int drawEnd = lineHeight / 2 + WIN_H / 2;
 		if(drawEnd >= WIN_H) drawEnd = WIN_H - 1;
 
-		int texNum = (game->map[mapX].val[mapY] - 48) - 1; //1 subtracted from it so that texture 0 can be used!
+		// int texNum = (game->map[mapX].val[mapY] - 48) - 1; //1 subtracted from it so that texture 0 can be used!
 
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit

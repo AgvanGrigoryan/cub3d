@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/21 21:53:54 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:47:59 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_texs
 	t_img	so;
 	t_img	ea;
 	t_img	we;
+	t_img	dopen;
+	t_img	dclose;
 	int		flr;
 	int		clg;
 }	t_texs;

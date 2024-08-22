@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:54 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/01 10:19:48 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:50:56 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	color_validation(char *color)
 
 int	are_all_colors_valid(t_scene_info *sc_info)
 {
-	if (color_validation(sc_info->texs[4].value) == -1
-		|| color_validation(sc_info->texs[5].value) == -1)
+	if (color_validation(sc_info->texs[6].value) == -1
+		|| color_validation(sc_info->texs[7].value) == -1)
 		return (-1);
 	else
 		return (1);
