@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/22 13:56:36 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:25:41 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,8 @@ void	raycasting(t_game_info *game)
 			// CHECK are mapX and mapY in the correct range(0 < mapX/mapY < size) AND on map[mapX] is greather elements than mapY
 			if (game->map[mapX].val[mapY] == '1')
 				hit = 1;
+			else if (game->map[mapX].val[mapY] == 'C')
+				hit = 2;
 			else if (game->map[mapX].val[mapY] == 'D')
 				hit = 3;
 		}

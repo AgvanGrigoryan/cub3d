@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:23:01 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/22 18:23:21 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:12:55 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	pred(char *str, int is_bold, int fd)
 		write(2, "use 'BOLD' or 'NOT_BOLD'\n", 25);
 		return ;
 	}
+	if (str == NULL)
+		return ;
 	while (*str)
 		write(fd, str++, 1);
 	write(fd, "\033[0m", 5);

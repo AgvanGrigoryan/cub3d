@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/21 21:38:53 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:26:44 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ void	set_player_pos(t_line *map, t_player *pl)
 	}
 }
 
+void	open_door(t_game_info *game)
+{
+	int		i;
+	int		j;
+
+	i = (int) (game->pl.posX + game->pl.dirX);
+	j = (int) (game->pl.posY + game->pl.dirY);
+	if (game->map[i].val[j] == 'D')
+		game->map[i].val[j] = 'C';
+	else if (game->map[i].val[j] == 'C')
+		game->map[i].val[j] = 'D';
+}
+
 int	key_hook(int key, t_game_info *game)
 {
 	if (key == ESC_KEYCODE)
@@ -86,6 +99,8 @@ int	key_hook(int key, t_game_info *game)
 		move_left(game->map, &game->pl);
 	if (key == D_KEYCODE)
 		move_right(game->map, &game->pl);
+	if (key == 14)
+		open_door(game);
 	if (key == SHIFT_KEYCODE && game->pl.can_run == 1)
 	{
 		game->pl.walk_speed *= 2.0;
