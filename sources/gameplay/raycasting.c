@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/29 12:25:41 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:28:34 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	draw_scene(t_game_info *game)
 		for (int j = 0; j < WIN_W; j++)
 			my_mlx_pixel_put(&game->img, j, i, game->texs.flr);
 	raycasting(game);
-	// draw_mini_map(game);
+	draw_mini_map(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	my_mlx_image_clear(&game->img);
 	return (0);
@@ -93,7 +93,7 @@ void	draw_mini_map(t_game_info *game)
 	while (map[i].val != NULL && i < s_i + 2 * game->map_rad)
 	{
 		j = s_j;
-		while (map[i].val[j] != '\0' && j <  s_j + 2 * game->map_rad)
+		while (j < map[i].len && map[i].val[j] != '\0' && j <  s_j + 2 * game->map_rad)
 		{
 			// horizontal
 			x1 = CELL_SZ * (j - s_j);
