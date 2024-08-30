@@ -43,7 +43,8 @@ SRCS_NAME = main.c \
 			validation/color_validation.c \
 			gameplay/game.c\
 			gameplay/raycasting.c\
-			gameplay/movement.c
+			gameplay/movement.c\
+			utilities/torchanim.c
 
 # Objects file names
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))

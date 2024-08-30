@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 15:19:37 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:19:44 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_square(t_img *img, int x1, int y1, int size, int color);
 void	draw_mini_map(t_game_info *game);
 void	draw_player(t_game_info *game, double s_i, double s_j);
 
-# define CELL_SZ 25
+# define CELL_SZ 10
 
 void	draw_clg_and_flr(t_game_info *game)
 {
@@ -34,13 +34,8 @@ int	draw_scene(t_game_info *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	draw_clg_and_flr(game);
-	for (int i = 0; i < WIN_H / 2; i++)
-		for (int j = 0; j < WIN_W; j++)
-			my_mlx_pixel_put(&game->img, j, i, game->texs.clg);
-	for (int i = WIN_H / 2; i < WIN_H; i++)
-		for (int j = 0; j < WIN_W; j++)
-			my_mlx_pixel_put(&game->img, j, i, game->texs.flr);
 	raycasting(game);
+	torch_anim(game);
 	draw_mini_map(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	my_mlx_image_clear(&game->img);

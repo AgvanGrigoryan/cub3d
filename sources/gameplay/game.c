@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 16:53:13 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:28:46 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 	game->is_map_mini = 1;
 	game->pl.walk_speed = 0.2;
 	game->map = sc_info->map;
+	get_torch_textures(game);
 	if (init_textures_img(game, sc_info) == -1)
 		return (-1);
 	if (init_flr_clg_colors(game, sc_info) == -1)
@@ -134,6 +135,8 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 	if (game->img.addr == NULL)
 		return (mlx_destroy_image(game->mlx, game->img.img),
 			destroy_texs_imgs(game->mlx, &game->texs), -1);
+	game->img.w = WIN_W;
+	game->img.h = WIN_H;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 16:58:23 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:56:38 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ strerror, exit, math functions
 
 # define TEXS_CNT 6
 
-# define WIN_W 1080
-# define WIN_H 920
+# define WIN_W 640
+# define WIN_H 480
 
 # define ROT_SPEED 0.1
 # define MOUSE_ROT_SPEED 0.007
@@ -131,6 +131,7 @@ typedef struct s_game_info
 	void			*win;
 	t_line			*map;
 	t_img			img;
+	t_img			torch[8];
 	t_texs			texs;
 	t_player		pl;
 }	t_game_info;
@@ -241,5 +242,9 @@ char			*get_next_line(int fd);
 
 // ft_split.c
 char			**ft_split(char const *s, char *seps);
+
+// torch_anim.c
+void			torch_anim(t_game_info *game);
+void			get_torch_textures(t_game_info *game);
 
 #endif

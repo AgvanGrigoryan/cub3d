@@ -5,7 +5,7 @@ EA ./textures/redbrick.xpm
 DO ./textures/barrel.xpm
 DC ./textures/bantik.xpm
 
-C 135,206,235
+C 0,0,0
 F 62,97,16
 
 1111111111
