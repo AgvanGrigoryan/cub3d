@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/29 16:28:34 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:19:37 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	draw_mini_map(t_game_info *game)
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0,204, 255, 204));
 			else if (map[i].val[j] == 'D')
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 100, 100, 255));
+			else if (map[i].val[j] == 'C')
+				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 69, 169, 69));
 			else if (map[i].val[j] == '0' || (map[i].val[j] == 'W' || map[i].val[j] == 'N'
 				|| map[i].val[j] == 'S' || map[i].val[j] == 'E'))
 				draw_square(&game->img, x1, y1, CELL_SZ, create_trgb(0, 255, 255, 255));

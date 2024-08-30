@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:05 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/20 18:44:21 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:42:47 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,5 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	// char * addr_end = img->addr +(WIN_H * img->line_len);
-	// if (dst >= img->addr && dst < addr_end
-	// 	&& x * (img->bpp / 8) > 0
-	// 	&& x * (img->bpp / 8) < img->line_len)
 	*(unsigned int *)dst = color;
 }

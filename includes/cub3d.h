@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/22 15:25:24 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:58:23 by natamazy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -49,6 +49,7 @@ strerror, exit, math functions
 # define D_KEYCODE 2
 # define W_KEYCODE 13
 # define M_KEYCODE 46
+# define E_KEYCODE 14
 # define ESC_KEYCODE 53
 # define SHIFT_KEYCODE 257
 # define LEFT_ARR 123
@@ -214,11 +215,14 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 double			ternard(int condition, double yes, double no);
 void			set_player_dir(char pl_dir, t_player *pl);
 void			set_player_pos(t_line *map, t_player *pl);
-int				key_hook(int key, t_game_info *game);
 void			my_mlx_image_clear(t_img *img);
+void			open_door(t_game_info *game);
+int				key_hook(int key, t_game_info *game);
 
-// utils4.c
+// utils5.c
 int				key_down_hook(int keycode, t_game_info *game);
+void			key_hook_1(int key, t_game_info *game);
+void			key_hook_2(int key, t_game_info *game);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
