@@ -6,36 +6,11 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 16:48:41 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:39:39 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	rotate_view(int keycode, t_player *pl, double rot_angle)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = pl->dirX;
-	old_plane_x = pl->planeX;
-	if (keycode == RIGHT_ARR)
-	{
-		pl->dirX = pl->dirX * cos(-rot_angle) - pl->dirY * sin(-rot_angle);
-		pl->dirY = old_dir_x * sin(-rot_angle) + pl->dirY * cos(-rot_angle);
-		pl->planeX = pl->planeX * cos(-rot_angle)
-			- pl->planeY * sin(-rot_angle);
-		pl->planeY = old_plane_x * sin(-rot_angle)
-			+ pl->planeY * cos(-rot_angle);
-	}
-	else if (keycode == LEFT_ARR)
-	{
-		pl->dirX = pl->dirX * cos(rot_angle) - pl->dirY * sin(rot_angle);
-		pl->dirY = old_dir_x * sin(rot_angle) + pl->dirY * cos(rot_angle);
-		pl->planeX = pl->planeX * cos(rot_angle) - pl->planeY * sin(rot_angle);
-		pl->planeY = old_plane_x * sin(rot_angle) + pl->planeY * cos(rot_angle);
-	}
-}
 
 void	move_left(t_line *map, t_player *pl)
 {

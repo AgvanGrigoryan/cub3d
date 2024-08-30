@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 18:56:38 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:43:45 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ strerror, exit, math functions
 # define SHIFT_KEYCODE 257
 # define LEFT_ARR 123
 # define RIGHT_ARR 124
+
+# define CELL_SZ 10
 
 
 typedef struct s_line
@@ -136,6 +138,46 @@ typedef struct s_game_info
 	t_player		pl;
 }	t_game_info;
 
+// typedef struct s_ray
+// {
+// 	double	cameraX;
+// 	double	rayDirX;
+// 	double	rayDirY;
+// 	int		mapX;
+// 	int		mapY;
+// 	double	sideDistX;
+// 	double	sideDistY;
+// 	double	deltaDistX;
+// 	double	deltaDistY;
+// 	double	perpWallDist;
+// 	int		stepX;
+// 	int		stepY;
+// 	int		hit;
+// 	int		side;
+// 	int		lineHeight;
+// 	int		drawStart;
+// 	int		drawEnd;
+// 	double	wallX;
+// 	int		texX;
+// 	int		texY;
+// 	double	step;
+// 	double	texPos;
+// }	t_ray;
+
+typedef struct s_dpoint
+{
+	double	x;
+	double	y;
+}	t_dpoint;
+
+typedef struct s_ipoint
+{
+	int	x;
+	int	y;
+}	t_ipoint;
+
+
+
 // arr - dynamic string matrix
 // length - current length of elements
 // capacity - max length of elements in this array
@@ -158,6 +200,9 @@ int				game_start(t_scene_info *info);
 // raycasting.c
 int				draw_scene(t_game_info *game);
 void			raycasting();
+void			draw_clg_and_flr(t_game_info *game);
+void			process_line(t_ipoint *d, t_ipoint *s, t_ipoint *e, t_ipoint *p1);
+void			choose_color(t_game_info *game, t_line *map, t_ipoint ij, t_dpoint	s);
 
 // movement.c
 int				mouse_move(int x, int y, t_game_info *game);
@@ -224,6 +269,8 @@ int				key_hook(int key, t_game_info *game);
 int				key_down_hook(int keycode, t_game_info *game);
 void			key_hook_1(int key, t_game_info *game);
 void			key_hook_2(int key, t_game_info *game);
+void			rotate_view(int keycode, t_player *pl, double rot_angle);
+
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
@@ -246,5 +293,17 @@ char			**ft_split(char const *s, char *seps);
 // torch_anim.c
 void			torch_anim(t_game_info *game);
 void			get_torch_textures(t_game_info *game);
+
+// game.c
+int				destroy_texs_imgs(void *mlx, t_texs *texs);
+int				check_texs_img(t_texs *texs);
+int				get_textures_data(t_game_info *game);
+
+// draw.c
+void	draw_mini_map(t_game_info *game);
+void	draw_square(t_img *img, t_ipoint xy, int size, int color);
+void	draw_player(t_game_info *game, double s_i, double s_j);
+int		draw_scene(t_game_info *game);
+void	draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
 
 #endif

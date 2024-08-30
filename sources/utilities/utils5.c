@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:01:11 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 16:57:27 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:39:58 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,30 @@ void	key_hook_2(int key, t_game_info *game)
 		if (game->is_map_mini)
 			game->map_rad *= 1000;
 		game->is_map_mini = !game->is_map_mini;
+	}
+}
+
+void	rotate_view(int keycode, t_player *pl, double rot_angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = pl->dirX;
+	old_plane_x = pl->planeX;
+	if (keycode == RIGHT_ARR)
+	{
+		pl->dirX = pl->dirX * cos(-rot_angle) - pl->dirY * sin(-rot_angle);
+		pl->dirY = old_dir_x * sin(-rot_angle) + pl->dirY * cos(-rot_angle);
+		pl->planeX = pl->planeX * cos(-rot_angle)
+			- pl->planeY * sin(-rot_angle);
+		pl->planeY = old_plane_x * sin(-rot_angle)
+			+ pl->planeY * cos(-rot_angle);
+	}
+	else if (keycode == LEFT_ARR)
+	{
+		pl->dirX = pl->dirX * cos(rot_angle) - pl->dirY * sin(rot_angle);
+		pl->dirY = old_dir_x * sin(rot_angle) + pl->dirY * cos(rot_angle);
+		pl->planeX = pl->planeX * cos(rot_angle) - pl->planeY * sin(rot_angle);
+		pl->planeY = old_plane_x * sin(rot_angle) + pl->planeY * cos(rot_angle);
 	}
 }
