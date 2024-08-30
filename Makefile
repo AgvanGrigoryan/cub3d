@@ -44,6 +44,8 @@ SRCS_NAME = main.c \
 			gameplay/game.c\
 			gameplay/raycasting.c\
 			gameplay/movement.c\
+			gameplay/init.c\
+			gameplay/draw.c\
 			utilities/torchanim.c
 
 # Objects file names
