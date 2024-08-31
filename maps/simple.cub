@@ -2,7 +2,7 @@ NO ./textures/main/wall_4.xpm
 WE ./textures/main/wall_3.xpm
 SO ./textures/main/wall_2.xpm
 EA ./textures/main/wall_1.xpm
-DO ./textures/main/dooropen.xpm
+DO ./textures/main/dooropen42.xpm
 DC ./textures/main/doorclose.xpm
 
 C 0,0,0
