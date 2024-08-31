@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 17:55:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 19:29:23 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:01:49 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void	print_torch(t_game_info *game, int i)
 		while (++y < WIN_H)
 		{
 			color = my_mlx_color_taker(&game->torch[i], px, py);
-
 			if (color == 4278190080)
 				color = my_mlx_color_taker(&game->img, x, y);
-
 			my_mlx_pixel_put(&game->img, x, y, color);
 			py++;
 		}
@@ -111,25 +109,4 @@ void	set_torch_textures(t_game_info *game)
 	game->torch[7].img = mlx_xpm_file_to_image(game->mlx,
 			"./torchanim/8.xpm", &game->torch[7].w,
 			&game->torch[7].h);
-}
-
-void	get_torch_textures(t_game_info *game)
-{
-	int	i;
-
-	set_torch_textures(game);
-	if (!game->torch[0].img || !game->torch[1].img
-		|| !game->torch[2].img || !game->torch[3].img
-		|| !game->torch[4].img || !game->torch[5].img
-		|| !game->torch[6].img || !game->torch[7].img)
-		destroy_torch_imgs(game->mlx, game->torch);
-	i = -1;
-	while (++i < 8)
-	{
-		game->torch[i].addr = mlx_get_data_addr(game->torch[i].img,
-				&game->torch[i].bpp, &game->torch[i].line_len,
-				&game->torch[i].endian);
-		if (!game->torch[i].addr)
-			destroy_torch_imgs(game->mlx, game->torch);
-	}
 }

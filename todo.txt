@@ -1,7 +1,0 @@
-1. Fix textures drawing +
-
-3. Add Doors Mechanism
-4. Add movement with the mouse +
-5. DRAW MINIMAP BY RADIUS
-?. maybe convert map to char **
-?. Norm@ tox verchum!

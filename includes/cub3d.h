@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 21:43:45 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:13:46 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,8 @@ void			key_hook_1(int key, t_game_info *game);
 void			key_hook_2(int key, t_game_info *game);
 void			rotate_view(int keycode, t_player *pl, double rot_angle);
 
+// utils6.c
+void			get_torch_textures(t_game_info *game);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
@@ -292,7 +294,8 @@ char			**ft_split(char const *s, char *seps);
 
 // torch_anim.c
 void			torch_anim(t_game_info *game);
-void			get_torch_textures(t_game_info *game);
+void			set_torch_textures(t_game_info *game);
+int				destroy_torch_imgs(void *mlx, t_img *torch);
 
 // game.c
 int				destroy_texs_imgs(void *mlx, t_texs *texs);

@@ -30,6 +30,7 @@ SRCS_NAME = main.c \
 			utilities/utils3.c \
 			utilities/utils4.c \
 			utilities/utils5.c \
+			utilities/utils6.c \
 			utilities/array_utils.c \
 			utilities/convert_tabs.c \
 			utilities/key_value_utils.c \

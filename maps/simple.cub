@@ -1,12 +1,12 @@
-NO ./textures/redbrick.xpm
-WE ./textures/redbrick.xpm
-SO ./textures/redbrick.xpm
-EA ./textures/redbrick.xpm
-DO ./textures/barrel.xpm
-DC ./textures/bantik.xpm
+NO ./textures/main/wall_4.xpm
+WE ./textures/main/wall_3.xpm
+SO ./textures/main/wall_2.xpm
+EA ./textures/main/wall_1.xpm
+DO ./textures/main/dooropen.xpm
+DC ./textures/main/doorclose.xpm
 
 C 0,0,0
-F 62,97,16
+F 30,30,30
 
 1111111111
 1001
