@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 12:09:18 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:27:52 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,37 @@ strerror, exit, math functions
 # include <stdbool.h>
 # include <math.h>
 
-# define RED	"\033[0;031m"
-# define BOLD_RED	"\033[1;031m"
-# define BOLD 1
-# define NOT_BOLD 0
+// Color printing
+# define RED				"\033[0;031m"
+# define BOLD_RED			"\033[1;031m"
+# define BOLD				1
+# define NOT_BOLD			0
 
-# define FN_MIN_LEN 4
-# define FN_EXT ".cub"
+// Sizes
+# define FN_MIN_LEN			4
+# define FN_EXT				".cub"
 
-# define TEXS_CNT 6
+# define TEXS_CNT			6
 
-# define WIN_W 960
-# define WIN_H 480
+# define WIN_W				960
+# define WIN_H				480
 
-# define ROT_SPEED 0.1
-# define MOUSE_ROT_SPEED 0.007
+# define ROT_SPEED			0.1
+# define MOUSE_ROT_SPEED	0.007
 
-// KEYCODES
-# define A_KEYCODE 0
-# define S_KEYCODE 1
-# define D_KEYCODE 2
-# define W_KEYCODE 13
-# define M_KEYCODE 46
-# define E_KEYCODE 14
-# define ESC_KEYCODE 53
-# define SHIFT_KEYCODE 257
-# define LEFT_ARR 123
-# define RIGHT_ARR 124
+# define CELL_SZ			10
 
-# define CELL_SZ 10
+// Keycodes
+# define A_KEYCODE			0
+# define S_KEYCODE			1
+# define D_KEYCODE			2
+# define W_KEYCODE			13
+# define M_KEYCODE			46
+# define E_KEYCODE			14
+# define ESC_KEYCODE		53
+# define SHIFT_KEYCODE		257
+# define LEFT_ARR			123
+# define RIGHT_ARR			124
 
 typedef struct s_dpoint
 {
@@ -142,25 +144,25 @@ typedef struct s_ray
 	double		raydir_x;
 	double		raydir_y;
 	int			map_x;
-	int			mapY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	double		perpWallDist;
-	int			stepX;
-	int			stepY;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 	int			color;
-	double		wallX;
-	int			texY;
-	int			texX;
+	double		wall_x;
+	int			tex_y;
+	int			tex_x;
 	double		step;
-	double		texPos;
+	double		tex_pos;
 	t_dpoint	ray_dir;
 }	t_ray;
 
@@ -275,6 +277,8 @@ void			rotate_view(int keycode, t_player *pl, double rot_angle);
 
 // utils6.c
 void			get_torch_textures(t_game_info *game);
+void			draw_player_helper(t_game_info *game,
+					t_dpoint *l_dir, t_dpoint *r_dir);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);

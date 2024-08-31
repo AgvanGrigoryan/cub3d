@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:01:11 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/31 12:08:50 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:25:02 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ void	rotate_view(int keycode, t_player *pl, double rot_angle)
 	{
 		pl->dir_x = pl->dir_x * cos(rot_angle) - pl->dir_y * sin(rot_angle);
 		pl->dir_y = old_dir_x * sin(rot_angle) + pl->dir_y * cos(rot_angle);
-		pl->plane_x = pl->plane_x * cos(rot_angle) - pl->plane_y * sin(rot_angle);
-		pl->plane_y = old_plane_x * sin(rot_angle) + pl->plane_y * cos(rot_angle);
+		pl->plane_x = pl->plane_x * cos(rot_angle)
+			- pl->plane_y * sin(rot_angle);
+		pl->plane_y = old_plane_x * sin(rot_angle)
+			+ pl->plane_y * cos(rot_angle);
 	}
 }

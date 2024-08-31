@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 21:10:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 12:07:44 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:27:17 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	draw_player(t_game_info *game, double s_i, double s_j)
 	p2.x = p1.x + (game->pl.dir_y * line_len);
 	p2.y = p1.y + (game->pl.dir_x * line_len);
 	draw_line(p1, p2, create_trgb(0, 255, 0, 0), &game->img);
-	l_dir.x = game->pl.dir_x * cos(0.66) - game->pl.dir_y * sin(0.66);
-	l_dir.y = game->pl.dir_x * sin(0.66) + game->pl.dir_y * cos(0.66);
-	r_dir.x = game->pl.dir_x * cos(-0.66) - game->pl.dir_y * sin(-0.66);
-	r_dir.y = game->pl.dir_x * sin(-0.66) + game->pl.dir_y * cos(-0.66);
+	draw_player_helper(game, &l_dir, &r_dir);
 	p2.x = p1.x + (l_dir.y * line_len);
 	p2.y = p1.y + (l_dir.x * line_len);
 	draw_line(p1, p2, create_trgb(0, 0, 102, 255), &game->img);
