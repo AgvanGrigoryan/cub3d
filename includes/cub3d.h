@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 11:13:46 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:09:18 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ strerror, exit, math functions
 # include <stdbool.h>
 # include <math.h>
 
-// colored printing
 # define RED	"\033[0;031m"
 # define BOLD_RED	"\033[1;031m"
 # define BOLD 1
@@ -37,7 +36,7 @@ strerror, exit, math functions
 
 # define TEXS_CNT 6
 
-# define WIN_W 640
+# define WIN_W 960
 # define WIN_H 480
 
 # define ROT_SPEED 0.1
@@ -57,6 +56,11 @@ strerror, exit, math functions
 
 # define CELL_SZ 10
 
+typedef struct s_dpoint
+{
+	double	x;
+	double	y;
+}	t_dpoint;
 
 typedef struct s_line
 {
@@ -93,14 +97,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-// typedef struct s_trgb
-// {
-// 	int	t;
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// }	t_trgb;
-
 typedef struct s_texs
 {
 	t_img	no;
@@ -115,12 +111,12 @@ typedef struct s_texs
 
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	double	walk_speed;
 	int		can_run;
 }	t_player;
@@ -138,45 +134,41 @@ typedef struct s_game_info
 	t_player		pl;
 }	t_game_info;
 
-// typedef struct s_ray
-// {
-// 	double	cameraX;
-// 	double	rayDirX;
-// 	double	rayDirY;
-// 	int		mapX;
-// 	int		mapY;
-// 	double	sideDistX;
-// 	double	sideDistY;
-// 	double	deltaDistX;
-// 	double	deltaDistY;
-// 	double	perpWallDist;
-// 	int		stepX;
-// 	int		stepY;
-// 	int		hit;
-// 	int		side;
-// 	int		lineHeight;
-// 	int		drawStart;
-// 	int		drawEnd;
-// 	double	wallX;
-// 	int		texX;
-// 	int		texY;
-// 	double	step;
-// 	double	texPos;
-// }	t_ray;
-
-typedef struct s_dpoint
+typedef struct s_ray
 {
-	double	x;
-	double	y;
-}	t_dpoint;
+	int			x;
+	int			y;
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	int			map_x;
+	int			mapY;
+	double		sideDistX;
+	double		sideDistY;
+	double		deltaDistX;
+	double		deltaDistY;
+	double		perpWallDist;
+	int			stepX;
+	int			stepY;
+	int			hit;
+	int			side;
+	int			lineHeight;
+	int			drawStart;
+	int			drawEnd;
+	int			color;
+	double		wallX;
+	int			texY;
+	int			texX;
+	double		step;
+	double		texPos;
+	t_dpoint	ray_dir;
+}	t_ray;
 
 typedef struct s_ipoint
 {
 	int	x;
 	int	y;
 }	t_ipoint;
-
-
 
 // arr - dynamic string matrix
 // length - current length of elements
@@ -199,10 +191,20 @@ int				game_start(t_scene_info *info);
 
 // raycasting.c
 int				draw_scene(t_game_info *game);
-void			raycasting();
+void			raycasting(t_game_info *game);
 void			draw_clg_and_flr(t_game_info *game);
-void			process_line(t_ipoint *d, t_ipoint *s, t_ipoint *e, t_ipoint *p1);
-void			choose_color(t_game_info *game, t_line *map, t_ipoint ij, t_dpoint	s);
+void			process_line(t_ipoint *d, t_ipoint *s,
+					t_ipoint *e, t_ipoint *p1);
+void			choose_color(t_game_info *game, t_line *map,
+					t_ipoint ij, t_dpoint	s);
+void			draw_clg_and_flr(t_game_info *game);
+void			choose_color(t_game_info *game, t_line *map,
+					t_ipoint ij, t_dpoint s);
+char			*get_texture(t_game_info *game, int hit,
+					int side, t_dpoint ray_dir);
+void			raycasting_1(t_game_info *game, t_ray *ray);
+void			raycasting_2(t_game_info *game, t_ray *ray);
+void			raycasting_3(t_game_info *game, t_ray *ray);
 
 // movement.c
 int				mouse_move(int x, int y, t_game_info *game);
@@ -303,10 +305,10 @@ int				check_texs_img(t_texs *texs);
 int				get_textures_data(t_game_info *game);
 
 // draw.c
-void	draw_mini_map(t_game_info *game);
-void	draw_square(t_img *img, t_ipoint xy, int size, int color);
-void	draw_player(t_game_info *game, double s_i, double s_j);
-int		draw_scene(t_game_info *game);
-void	draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
+void			draw_mini_map(t_game_info *game);
+void			draw_square(t_img *img, t_ipoint xy, int size, int color);
+void			draw_player(t_game_info *game, double s_i, double s_j);
+int				draw_scene(t_game_info *game);
+void			draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
 
 #endif

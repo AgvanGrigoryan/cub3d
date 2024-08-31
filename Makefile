@@ -44,6 +44,7 @@ SRCS_NAME = main.c \
 			validation/color_validation.c \
 			gameplay/game.c\
 			gameplay/raycasting.c\
+			gameplay/raycasting_utils.c\
 			gameplay/movement.c\
 			gameplay/init.c\
 			gameplay/draw.c\

@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 21:10:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 21:43:45 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:07:44 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	draw_player(t_game_info *game, double s_i, double s_j)
 	t_dpoint	r_dir;
 
 	line_len = 30;
-	p1.x = (CELL_SZ * game->pl.posY) - (s_j * CELL_SZ);
-	p1.y = (CELL_SZ * game->pl.posX) - (s_i * CELL_SZ);
+	p1.x = (CELL_SZ * game->pl.pos_y) - (s_j * CELL_SZ);
+	p1.y = (CELL_SZ * game->pl.pos_x) - (s_i * CELL_SZ);
 	draw_square(&game->img, (t_ipoint){p1.x - CELL_SZ / 4, p1.y - CELL_SZ / 4},
 		CELL_SZ / 2, create_trgb(0, 102, 153, 153));
-	p2.x = p1.x + (game->pl.dirY * line_len);
-	p2.y = p1.y + (game->pl.dirX * line_len);
+	p2.x = p1.x + (game->pl.dir_y * line_len);
+	p2.y = p1.y + (game->pl.dir_x * line_len);
 	draw_line(p1, p2, create_trgb(0, 255, 0, 0), &game->img);
-	l_dir.x = game->pl.dirX * cos(0.66) - game->pl.dirY * sin(0.66);
-	l_dir.y = game->pl.dirX * sin(0.66) + game->pl.dirY * cos(0.66);
-	r_dir.x = game->pl.dirX * cos(-0.66) - game->pl.dirY * sin(-0.66);
-	r_dir.y = game->pl.dirX * sin(-0.66) + game->pl.dirY * cos(-0.66);
+	l_dir.x = game->pl.dir_x * cos(0.66) - game->pl.dir_y * sin(0.66);
+	l_dir.y = game->pl.dir_x * sin(0.66) + game->pl.dir_y * cos(0.66);
+	r_dir.x = game->pl.dir_x * cos(-0.66) - game->pl.dir_y * sin(-0.66);
+	r_dir.y = game->pl.dir_x * sin(-0.66) + game->pl.dir_y * cos(-0.66);
 	p2.x = p1.x + (l_dir.y * line_len);
 	p2.y = p1.y + (l_dir.x * line_len);
 	draw_line(p1, p2, create_trgb(0, 0, 102, 255), &game->img);
@@ -102,12 +102,12 @@ void	draw_mini_map(t_game_info *game)
 
 	map = game->map;
 	ij.x = 0.0;
-	if (game->pl.posX - game->map_rad > 0)
-		ij.x = game->pl.posX - game->map_rad;
+	if (game->pl.pos_x - game->map_rad > 0)
+		ij.x = game->pl.pos_x - game->map_rad;
 	s.x = ij.x;
 	ij.y = 0.0;
-	if (game->pl.posY - game->map_rad > 0)
-		ij.y = game->pl.posY - game->map_rad;
+	if (game->pl.pos_y - game->map_rad > 0)
+		ij.y = game->pl.pos_y - game->map_rad;
 	s.y = ij.y;
 	while (map[ij.x].val != NULL && ij.x < s.x + 2 * game->map_rad)
 	{

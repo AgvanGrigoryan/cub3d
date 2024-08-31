@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:47:07 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 20:08:37 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:05:32 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	init_flr_clg_colors(t_game_info *game, t_scene_info *sc_info)
 void	init_player_info(t_line *map, t_player *pl)
 {
 	set_player_pos(map, pl);
-	set_player_dir(map[(int)pl->posX].val[(int)pl->posY], pl);
-	map[(int)pl->posX].val[(int)pl->posY] = '0';
+	set_player_dir(map[(int)pl->pos_x].val[(int)pl->pos_y], pl);
+	map[(int)pl->pos_x].val[(int)pl->pos_y] = '0';
 }
 
 // destroy_texs_imgs(game->mlx, &game->texs)

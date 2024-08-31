@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:55:53 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 21:39:39 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:07:46 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	move_left(t_line *map, t_player *pl)
 	double	x;
 	double	y;
 
-	x = pl->posX - pl->dirY * pl->walk_speed;
-	y = pl->posY;
+	x = pl->pos_x - pl->dir_y * pl->walk_speed;
+	y = pl->pos_y;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posX = x;
-	x = pl->posX;
-	y = pl->posY + pl->dirX * pl->walk_speed;
+		pl->pos_x = x;
+	x = pl->pos_x;
+	y = pl->pos_y + pl->dir_x * pl->walk_speed;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posY = y;
+		pl->pos_y = y;
 }
 
 void	move_right(t_line *map, t_player *pl)
@@ -32,14 +32,14 @@ void	move_right(t_line *map, t_player *pl)
 	double	x;
 	double	y;
 
-	x = pl->posX + pl->dirY * pl->walk_speed;
-	y = pl->posY;
+	x = pl->pos_x + pl->dir_y * pl->walk_speed;
+	y = pl->pos_y;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posX = x;
-	x = pl->posX;
-	y = pl->posY - pl->dirX * pl->walk_speed;
+		pl->pos_x = x;
+	x = pl->pos_x;
+	y = pl->pos_y - pl->dir_x * pl->walk_speed;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posY = y;
+		pl->pos_y = y;
 }
 
 void	move_back(t_line *map, t_player *pl)
@@ -47,14 +47,14 @@ void	move_back(t_line *map, t_player *pl)
 	double	x;
 	double	y;
 
-	x = pl->posX - pl->dirX * pl->walk_speed;
-	y = pl->posY;
+	x = pl->pos_x - pl->dir_x * pl->walk_speed;
+	y = pl->pos_y;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posX = x;
-	x = pl->posX;
-	y = pl->posY - pl->dirY * pl->walk_speed;
+		pl->pos_x = x;
+	x = pl->pos_x;
+	y = pl->pos_y - pl->dir_y * pl->walk_speed;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posY = y;
+		pl->pos_y = y;
 }
 
 void	move_ahead(t_line *map, t_player *pl)
@@ -64,14 +64,14 @@ void	move_ahead(t_line *map, t_player *pl)
 
 	if (pl->can_run == 0)
 		pl->can_run = 1;
-	x = pl->posX + pl->dirX * pl->walk_speed;
-	y = pl->posY;
+	x = pl->pos_x + pl->dir_x * pl->walk_speed;
+	y = pl->pos_y;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posX = x;
-	x = pl->posX;
-	y = pl->posY + pl->dirY * pl->walk_speed;
+		pl->pos_x = x;
+	x = pl->pos_x;
+	y = pl->pos_y + pl->dir_y * pl->walk_speed;
 	if (map[(int)x].val[(int)y] != '1' && map[(int)x].val[(int)y] != 'D')
-		pl->posY = y;
+		pl->pos_y = y;
 }
 
 int	mouse_move(int x, int y, t_game_info *game)

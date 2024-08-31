@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 17:55:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 11:01:49 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:15:08 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,27 @@ int	destroy_torch_imgs(void *mlx, t_img *torch)
 void	set_torch_textures(t_game_info *game)
 {
 	game->torch[0].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/1.xpm", &game->torch[0].w,
+			"./textures/torchanim/1.xpm", &game->torch[0].w,
 			&game->torch[0].h);
 	game->torch[1].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/2.xpm", &game->torch[1].w,
+			"./textures/torchanim/2.xpm", &game->torch[1].w,
 			&game->torch[1].h);
 	game->torch[2].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/3.xpm", &game->torch[2].w,
+			"./textures/torchanim/3.xpm", &game->torch[2].w,
 			&game->torch[2].h);
 	game->torch[3].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/4.xpm", &game->torch[3].w,
+			"./textures/torchanim/4.xpm", &game->torch[3].w,
 			&game->torch[3].h);
 	game->torch[4].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/5.xpm", &game->torch[4].w,
+			"./textures/torchanim/5.xpm", &game->torch[4].w,
 			&game->torch[4].h);
 	game->torch[5].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/6.xpm", &game->torch[5].w,
+			"./textures/torchanim/6.xpm", &game->torch[5].w,
 			&game->torch[5].h);
 	game->torch[6].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/7.xpm", &game->torch[6].w,
+			"./textures/torchanim/7.xpm", &game->torch[6].w,
 			&game->torch[6].h);
 	game->torch[7].img = mlx_xpm_file_to_image(game->mlx,
-			"./torchanim/8.xpm", &game->torch[7].w,
+			"./textures/torchanim/8.xpm", &game->torch[7].w,
 			&game->torch[7].h);
 }
