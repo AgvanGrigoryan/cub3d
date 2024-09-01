@@ -6,13 +6,12 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:06:31 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/31 12:08:43 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:56:48 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// ternar for double numbers
 double	ternard(int condition, double yes, double no)
 {
 	if (condition == 1)

@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/30 20:04:06 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:59:09 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	close_game(t_game_info *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
+	system("leaks cub3D");
 	exit (0);
 }
 
@@ -85,7 +86,6 @@ int	get_textures_data(t_game_info *game)
 	return (0);
 }
 
-// add to states of doors and sprite textures bi fire if check
 int	game_start(t_scene_info *sc_info)
 {
 	t_game_info	*game;

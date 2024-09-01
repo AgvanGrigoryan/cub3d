@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_tabs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:40:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/03 13:33:02 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:58:32 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,16 @@ char	*replace_tabs(char *str, t_line	*line)
 	return (res);
 }
 
-t_line	*get_converted_map(t_dyn_arr *buf)
+t_line	*get_converted_map(t_dyn_arr *buf, int i, int j)
 {
 	t_line	*map;
 	int		map_len;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
+	{
+		free(buf->arr[i]);
 		i++;
+	}
 	map_len = buf->length - i;
 	map = malloc(sizeof(t_line) * (map_len + 1));
 	if (map == NULL)
@@ -90,11 +89,13 @@ t_line	*get_converted_map(t_dyn_arr *buf)
 	while (j < map_len)
 	{
 		map[j].val = replace_tabs(buf->arr[i], map + j);
+		free(buf->arr[i]);
 		if (map[j].val == NULL)
 			return (free_map(map), NULL);
 		i++;
 		j++;
 	}
 	map[j].val = NULL;
+	free(buf->arr);
 	return (map);
 }

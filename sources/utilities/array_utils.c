@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:23:11 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/02 13:52:26 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:56:39 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ t_dyn_arr	*create_dyn_arr(void)
 	return (dyn_arr);
 }
 
-// The function of adding a value to an array makes the array dynamic.
-//arguments:
-//		arr - dynamic array
-//		value - new value of array
 int	append(t_dyn_arr *arr, char *value)
 {
 	char	**new_arr;

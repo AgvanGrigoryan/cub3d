@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:47:07 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 12:05:32 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:56:36 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	init_player_info(t_line *map, t_player *pl)
 	map[(int)pl->pos_x].val[(int)pl->pos_y] = '0';
 }
 
-// destroy_texs_imgs(game->mlx, &game->texs)
-// or call function and do this and other cleaning actions in that function
 int	game_init(t_game_info *game, t_scene_info *sc_info)
 {
 	game->pl.can_run = 0;

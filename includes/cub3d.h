@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:24:36 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:58:24 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ int				pop(t_dyn_arr *arr, int index);
 int				append(t_dyn_arr *arr, char *value);
 
 // convert_tabs.c
-t_line			*get_converted_map(t_dyn_arr *buf);
+t_line			*get_converted_map(t_dyn_arr *buf, int i, int j);
 
 // key_value_utils.c
 char			*get_value(t_key_value *arr, char *key);

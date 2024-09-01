@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:46:16 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:58:11 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	remove_extra_lines(t_dyn_arr *buf)
 	}
 }
 
-// maybe will change min length of buf
-// line if (buf == NULL || buf->length < 1)
 int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 {
 	remove_extra_lines(buf);
@@ -71,7 +69,7 @@ int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 		return (-1);
 	if (are_all_textures_valid(sc_info) == -1)
 		return (-1);
-	sc_info->map = get_converted_map(buf);
+	sc_info->map = get_converted_map(buf, 0, 0);
 	if (sc_info->map == NULL)
 		return (-1);
 	if (map_validation(sc_info->map) == -1)
