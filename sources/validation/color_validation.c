@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:54 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/22 13:50:56 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:49:21 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	color_validation(char *color)
 	if (color[ft_strlen(color) - 1] == ',')
 		return (pred("Incorrect color format | xxx,xxx,xxx\n", BOLD, 2), -1);
 	colors = ft_split(color, ",");
+	if (colors == NULL)
+		return (pred("color validation\n", BOLD, 2), -1);
 	i = len_of(colors);
 	if (i != 3)
 		return (pred("Incorrect color format | xxx,xxx,xxx\n", BOLD, 2), -1);
@@ -42,6 +44,7 @@ int	color_validation(char *color)
 			return (pred("Color in range 0,255\n", BOLD, 2), -1);
 		i++;
 	}
+	free_nmatrix(colors, 3);
 	return (1);
 }
 

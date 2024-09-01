@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 12:27:52 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:24:36 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ strerror, exit, math functions
 
 # define TEXS_CNT			6
 
-# define WIN_W				960
-# define WIN_H				480
+# define WIN_W				900
+# define WIN_H				600
 
 # define ROT_SPEED			0.1
 # define MOUSE_ROT_SPEED	0.007

@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:23:01 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/29 12:12:55 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:43:53 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	free_nmatrix(char **matrix, int n)
 	int	i;
 
 	i = 0;
+	if (matrix == NULL)
+		return ;
 	while (matrix[i] && i < n)
 	{
 		free(matrix[i]);

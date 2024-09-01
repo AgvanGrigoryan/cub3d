@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:05 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/30 16:42:47 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:35:27 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,15 @@ int	create_trgb(int t, int r, int g, int b)
 int	str_to_trgb(char *str)
 {
 	char	**tmp;
+	int		color;
 
 	tmp = ft_split(str, ",");
 	if (tmp == NULL)
 		return (-1);
-	return (create_trgb(0, ft_atoi(tmp[0]),
-			ft_atoi(tmp[1]), ft_atoi(tmp[2])));
+	color = create_trgb(0, ft_atoi(tmp[0]),
+			ft_atoi(tmp[1]), ft_atoi(tmp[2]));
+	free_nmatrix(tmp, 3);
+	return (color);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/16 22:11:53 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:46:16 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 		else
 			return (pred("Duplication of texture info\n", BOLD, 2),
 				free(splited), -1);
+		free(splited[0]);
 		free(splited);
 		i++;
 	}

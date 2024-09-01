@@ -2,11 +2,11 @@ NO ./textures/main/wall_4.xpm
 WE ./textures/main/wall_3.xpm
 SO ./textures/main/wall_2.xpm
 EA ./textures/main/wall_1.xpm
-DO ./textures/main/dooropen42.xpm
+DO ./textures/main/dooropen.xpm
 DC ./textures/main/doorclose.xpm
 
-C 0,0,0
-F 30,30,30
+C 5,6,7
+F 30,31,32
 
 1111111111
 1001

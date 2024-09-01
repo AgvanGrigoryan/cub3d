@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:33:09 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/07 15:40:47 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:48:04 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int	main(int argc, char *argv[])
 		return (1);
 	game_start(&sc_info);
 	free_scene_info_struct(&sc_info);
-	printf("Filename:%s\n", argv[1]);
 	return (0);
 }
