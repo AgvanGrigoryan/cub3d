@@ -1,7 +1,7 @@
-NO ./textures/main/wall_4.xpm
-WE ./textures/main/wall_4.xpm
-SO ./textures/main/wall_4.xpm
-EA ./textures/main/wall_4.xpm
+NO ./textures/main/wall_1.xpm
+WE ./textures/main/wall_1.xpm
+SO ./textures/main/wall_1.xpm
+EA ./textures/main/wall_1.xpm
 DO ./textures/main/dooropen.xpm
 DC ./textures/main/doorclose.xpm
 
