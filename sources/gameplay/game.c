@@ -1,23 +1,38 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 21:17:56 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/09/01 14:59:09 by natamazy         ###   ########.fr       */
+/*   Created: 2024/09/02 17:44:01 by aggrigor          #+#    #+#             */
+/*   Updated: 2024/09/02 18:09:20 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "mlx.h"
 
 int	close_game(t_game_info *game)
 {
+	mlx_destroy_image(game->mlx, game->torch[0].img);
+	mlx_destroy_image(game->mlx, game->torch[1].img);
+	mlx_destroy_image(game->mlx, game->torch[2].img);
+	mlx_destroy_image(game->mlx, game->torch[3].img);
+	mlx_destroy_image(game->mlx, game->torch[4].img);
+	mlx_destroy_image(game->mlx, game->torch[5].img);
+	mlx_destroy_image(game->mlx, game->torch[6].img);
+	mlx_destroy_image(game->mlx, game->torch[7].img);
+	mlx_destroy_image(game->mlx, game->texs.ea.img);
+	mlx_destroy_image(game->mlx, game->texs.so.img);
+	mlx_destroy_image(game->mlx, game->texs.no.img);
+	mlx_destroy_image(game->mlx, game->texs.we.img);
+	mlx_destroy_image(game->mlx, game->texs.dclose.img);
+	mlx_destroy_image(game->mlx, game->texs.dopen.img);
+	mlx_destroy_image(game->mlx, game->img.img);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	exit (0);
 }
 
@@ -100,7 +115,7 @@ int	game_start(t_scene_info *sc_info)
 	if (game->win == NULL)
 		return (-1);
 	if (game_init(game, sc_info) == -1)
-		return (-1);
+		return (free(sc_info->texs), -1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
 	mlx_hook(game->win, 2, 0, key_hook, game);
 	mlx_hook(game->win, 3, 0, key_down_hook, game);

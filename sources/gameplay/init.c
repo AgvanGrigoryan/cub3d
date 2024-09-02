@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:47:07 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:56:36 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:42:09 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "mlx.h"
@@ -56,28 +56,38 @@ void	init_player_info(t_line *map, t_player *pl)
 	map[(int)pl->pos_x].val[(int)pl->pos_y] = '0';
 }
 
-int	game_init(t_game_info *game, t_scene_info *sc_info)
+void	set_game_vars(t_game_info *game, t_scene_info *sc_info)
 {
 	game->pl.can_run = 0;
 	game->map_rad = 5.0;
 	game->is_map_mini = 1;
 	game->pl.walk_speed = 0.2;
 	game->map = sc_info->map;
-	get_torch_textures(game);
-	if (init_textures_img(game, sc_info) == -1)
+}
+
+int	game_init(t_game_info *game, t_scene_info *sc_info)
+{
+	set_game_vars(game, sc_info);
+	if (get_torch_textures(game) == -1)
 		return (-1);
+	if (init_textures_img(game, sc_info) == -1)
+		return (destroy_torch_imgs(game->mlx, game->torch), -1);
 	if (init_flr_clg_colors(game, sc_info) == -1)
-		return (destroy_texs_imgs(game->mlx, &game->texs), -1);
+		return (destroy_torch_imgs(game->mlx, game->torch),
+			destroy_texs_imgs(game->mlx, &game->texs), -1);
 	init_player_info(game->map, &game->pl);
 	game->img.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	if (game->img.img == NULL)
-		return (-1);
+		return (destroy_torch_imgs(game->mlx, game->torch),
+			destroy_texs_imgs(game->mlx, &game->texs), -1);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp,
 			&game->img.line_len, &game->img.endian);
 	if (game->img.addr == NULL)
-		return (mlx_destroy_image(game->mlx, game->img.img),
+		return (destroy_torch_imgs(game->mlx, game->torch),
+			mlx_destroy_image(game->mlx, game->img.img),
 			destroy_texs_imgs(game->mlx, &game->texs), -1);
 	game->img.w = WIN_W;
 	game->img.h = WIN_H;
+	free(sc_info->texs);
 	return (0);
 }

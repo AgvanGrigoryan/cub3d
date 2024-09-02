@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:58:24 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:56:47 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -186,19 +186,12 @@ typedef struct s_dyn_arr
 
 // game.c
 int				close_game(t_game_info *game);
-int				init_textures_img(t_game_info *game, t_scene_info *sc_info);
-void			init_player_info(t_line *map, t_player *pl);
-int				game_init(t_game_info *game, t_scene_info *sc_info);
+int				destroy_texs_imgs(void *mlx, t_texs *texs);
+int				check_texs_img(t_texs *texs);
+int				get_textures_data(t_game_info *game);
 int				game_start(t_scene_info *info);
 
 // raycasting.c
-int				draw_scene(t_game_info *game);
-void			raycasting(t_game_info *game);
-void			draw_clg_and_flr(t_game_info *game);
-void			process_line(t_ipoint *d, t_ipoint *s,
-					t_ipoint *e, t_ipoint *p1);
-void			choose_color(t_game_info *game, t_line *map,
-					t_ipoint ij, t_dpoint	s);
 void			draw_clg_and_flr(t_game_info *game);
 void			choose_color(t_game_info *game, t_line *map,
 					t_ipoint ij, t_dpoint s);
@@ -206,7 +199,12 @@ char			*get_texture(t_game_info *game, int hit,
 					int side, t_dpoint ray_dir);
 void			raycasting_1(t_game_info *game, t_ray *ray);
 void			raycasting_2(t_game_info *game, t_ray *ray);
+
+// raycasting_utils.c
 void			raycasting_3(t_game_info *game, t_ray *ray);
+void			raycasting_4(t_game_info *game, t_ray *ray);
+void			raycasting_5(t_game_info *game, t_ray *ray);
+void			raycasting(t_game_info *game);
 
 // movement.c
 int				mouse_move(int x, int y, t_game_info *game);
@@ -265,20 +263,22 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 double			ternard(int condition, double yes, double no);
 void			set_player_dir(char pl_dir, t_player *pl);
 void			set_player_pos(t_line *map, t_player *pl);
-void			my_mlx_image_clear(t_img *img);
 void			open_door(t_game_info *game);
 int				key_hook(int key, t_game_info *game);
 
 // utils5.c
+void			my_mlx_image_clear(t_img *img);
 int				key_down_hook(int keycode, t_game_info *game);
 void			key_hook_1(int key, t_game_info *game);
 void			key_hook_2(int key, t_game_info *game);
 void			rotate_view(int keycode, t_player *pl, double rot_angle);
 
 // utils6.c
-void			get_torch_textures(t_game_info *game);
+int				get_torch_textures(t_game_info *game);
 void			draw_player_helper(t_game_info *game,
 					t_dpoint *l_dir, t_dpoint *r_dir);
+void			process_line(t_ipoint *d, t_ipoint *s,
+					t_ipoint *e, t_ipoint *p1);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
@@ -303,16 +303,19 @@ void			torch_anim(t_game_info *game);
 void			set_torch_textures(t_game_info *game);
 int				destroy_torch_imgs(void *mlx, t_img *torch);
 
-// game.c
-int				destroy_texs_imgs(void *mlx, t_texs *texs);
-int				check_texs_img(t_texs *texs);
-int				get_textures_data(t_game_info *game);
-
 // draw.c
 void			draw_mini_map(t_game_info *game);
 void			draw_square(t_img *img, t_ipoint xy, int size, int color);
 void			draw_player(t_game_info *game, double s_i, double s_j);
 int				draw_scene(t_game_info *game);
 void			draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
+
+// init.c
+int				init_textures_img(t_game_info *game, t_scene_info *sc_info);
+int				init_flr_clg_colors(t_game_info *game, t_scene_info *sc_info);
+void			init_player_info(t_line *map, t_player *pl);
+void			set_game_vars(t_game_info *game, t_scene_info *sc_info);
+int				game_init(t_game_info *game, t_scene_info *sc_info);
+
 
 #endif

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/22 13:50:33 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:23:03 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -36,9 +36,9 @@ int	init_texs_struct(t_scene_info *sc_info)
 
 int	init_scene_info_struct(t_scene_info *sc_info)
 {
+	sc_info->map = NULL;
 	if (init_texs_struct(sc_info) == -1)
 		return (-1);
-	sc_info->map = NULL;
 	return (0);
 }
 
@@ -83,7 +83,7 @@ int	validation(char *scene_file, t_scene_info *sc_info)
 	if (fd == -1)
 		return (perror(scene_file), -1);
 	if (init_scene_info_struct(sc_info) == -1)
-		return (1);
+		return (-1);
 	if (parse_scene_file(fd, sc_info) == -1)
 	{
 		free_scene_info_struct(sc_info);

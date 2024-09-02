@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   convert_tabs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:40:14 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:58:32 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:13:12 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -78,10 +78,7 @@ t_line	*get_converted_map(t_dyn_arr *buf, int i, int j)
 	int		map_len;
 
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
-	{
-		free(buf->arr[i]);
 		i++;
-	}
 	map_len = buf->length - i;
 	map = malloc(sizeof(t_line) * (map_len + 1));
 	if (map == NULL)
@@ -89,13 +86,11 @@ t_line	*get_converted_map(t_dyn_arr *buf, int i, int j)
 	while (j < map_len)
 	{
 		map[j].val = replace_tabs(buf->arr[i], map + j);
-		free(buf->arr[i]);
 		if (map[j].val == NULL)
 			return (free_map(map), NULL);
 		i++;
 		j++;
 	}
 	map[j].val = NULL;
-	free(buf->arr);
 	return (map);
 }

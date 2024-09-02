@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   scene_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/01 14:58:11 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:40:33 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "get_next_line.h"
@@ -32,9 +32,14 @@ int	parse_scene_file(int fd, t_scene_info *sc_info)
 		}
 	}
 	if (validate_scene_file(sc_info, buf) == 0)
+	{
+		free_nmatrix(buf->arr, buf->length);
+		free(buf);
 		return (0);
+	}
 	pred("cub3D: Validation failed\n", BOLD, 2);
 	free_nmatrix(buf->arr, buf->length);
+	free(buf);
 	return (-1);
 }
 
@@ -86,14 +91,16 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
 	{
 		splited = ft_split(buf->arr[i], " \t\n");
-		if (splited == NULL || arrlen(splited) != 2)
+		if (splited == NULL)
+			return (-1);
+		else if (arrlen(splited) != 2)
 			return (pred("Incorrect texture format\n", BOLD, 2),
-				free(splited), -1);
+				free_nmatrix(splited, arrlen(splited)), -1);
 		if (get_value(sc_info->texs, splited[0]) == NULL)
 		{
 			if (set_value(sc_info->texs, splited[0], splited[1]) == -1)
 				return (pred("Unknown texture title\n", BOLD, 2),
-					free(splited), -1);
+					free_nmatrix(splited, arrlen(splited)), -1);
 		}
 		else
 			return (pred("Duplication of texture info\n", BOLD, 2),

@@ -1,22 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 11:41:35 by natamazy          #+#    #+#             */
-/*   Updated: 2024/08/31 12:25:19 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:53:39 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "mlx.h"
-
-void	draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
-void	draw_square(t_img *img, t_ipoint xy, int size, int color);
-void	draw_mini_map(t_game_info *game);
-void	draw_player(t_game_info *game, double s_i, double s_j);
 
 void	raycasting_3(t_game_info *game, t_ray *ray)
 {
@@ -101,20 +96,5 @@ void	raycasting(t_game_info *game)
 		raycasting_4(game, &ray);
 		raycasting_5(game, &ray);
 		ray.x++;
-	}
-}
-
-void	process_line(t_ipoint *d, t_ipoint *s, t_ipoint *e, t_ipoint *p1)
-{
-	e->y = 2 * e->x;
-	if (e->y > -d->y)
-	{
-		e->x -= d->y;
-		p1->x += s->x;
-	}
-	if (e->y < d->x)
-	{
-		e->x += d->x;
-		p1->y += s->y;
 	}
 }

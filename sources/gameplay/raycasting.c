@@ -1,22 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:52:18 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/08/31 12:25:15 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:50:26 by aggrigor         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 #include "mlx.h"
-
-void	draw_line(t_ipoint p1, t_ipoint p2, int color, t_img *img);
-void	draw_square(t_img *img, t_ipoint xy, int size, int color);
-void	draw_mini_map(t_game_info *game);
-void	draw_player(t_game_info *game, double s_i, double s_j);
 
 void	draw_clg_and_flr(t_game_info *game)
 {
