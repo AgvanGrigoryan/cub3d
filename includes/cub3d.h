@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/03 17:56:35 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:25:40 by natamazy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -280,6 +280,7 @@ void			draw_player_helper(t_game_info *game,
 					t_dpoint *l_dir, t_dpoint *r_dir);
 void			process_line(t_ipoint *d, t_ipoint *s,
 					t_ipoint *e, t_ipoint *p1);
+void			destroy_torch(t_game_info *game);
 
 // array_utils.c
 t_dyn_arr		*create_dyn_arr(void);
@@ -317,6 +318,5 @@ int				init_flr_clg_colors(t_game_info *game, t_scene_info *sc_info);
 void			init_player_info(t_line *map, t_player *pl);
 void			set_game_vars(t_game_info *game, t_scene_info *sc_info);
 int				game_init(t_game_info *game, t_scene_info *sc_info);
-
 
 #endif

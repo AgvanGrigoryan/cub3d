@@ -6,12 +6,19 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/03 18:09:41 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:23:50 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
+
+void	pred_free(t_dyn_arr *buf)
+{
+	pred("cub3D: Validation failed\n", BOLD, 2);
+	free_nmatrix(buf->arr, buf->length);
+	free(buf);
+}
 
 int	parse_scene_file(int fd, t_scene_info *sc_info)
 {
@@ -37,9 +44,7 @@ int	parse_scene_file(int fd, t_scene_info *sc_info)
 		free(buf);
 		return (0);
 	}
-	pred("cub3D: Validation failed\n", BOLD, 2);
-	free_nmatrix(buf->arr, buf->length);
-	free(buf);
+	pred_free(buf);
 	return (-1);
 }
 
@@ -103,8 +108,7 @@ int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 					free_nmatrix(splited, arrlen(splited)), -1);
 		}
 		else
-			return (pred("Duplication of texture info\n", BOLD, 2),
-				free(splited), -1);
+			return (pred("Duplicate\n", BOLD, 2), free(splited), -1);
 		free(splited[0]);
 		free(splited);
 		i++;

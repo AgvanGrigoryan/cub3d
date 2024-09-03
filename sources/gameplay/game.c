@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:01 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/09/03 18:17:17 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:24:55 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,7 @@
 int	close_game(t_game_info *game)
 {
 	free_scene_info_struct(game->sc_info);
-	if (game->torch[0].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[0].img);
-	if (game->torch[1].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[1].img);
-	if (game->torch[2].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[2].img);
-	if (game->torch[3].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[3].img);
-	if (game->torch[4].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[4].img);
-	if (game->torch[5].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[5].img);
-	if (game->torch[6].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[6].img);
-	if (game->torch[7].img != NULL)
-		mlx_destroy_image(game->mlx, game->torch[7].img);
+	destroy_torch(game);
 	if (game->texs.ea.img)
 		mlx_destroy_image(game->mlx, game->texs.ea.img);
 	if (game->texs.so.img)

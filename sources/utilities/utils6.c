@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:34:18 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/03 18:07:59 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:25:03 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,24 @@ void	process_line(t_ipoint *d, t_ipoint *s, t_ipoint *e, t_ipoint *p1)
 		e->x += d->x;
 		p1->y += s->y;
 	}
+}
+
+void	destroy_torch(t_game_info *game)
+{
+	if (game->torch[0].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[0].img);
+	if (game->torch[1].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[1].img);
+	if (game->torch[2].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[2].img);
+	if (game->torch[3].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[3].img);
+	if (game->torch[4].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[4].img);
+	if (game->torch[5].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[5].img);
+	if (game->torch[6].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[6].img);
+	if (game->torch[7].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[7].img);
 }
