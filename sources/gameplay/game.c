@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:01 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/09/02 18:09:20 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:58:01 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -115,7 +115,7 @@ int	game_start(t_scene_info *sc_info)
 	if (game->win == NULL)
 		return (-1);
 	if (game_init(game, sc_info) == -1)
-		return (free(sc_info->texs), -1);
+		return (-1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
 	mlx_hook(game->win, 2, 0, key_hook, game);
 	mlx_hook(game->win, 3, 0, key_down_hook, game);
