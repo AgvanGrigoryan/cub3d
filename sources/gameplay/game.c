@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:01 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/09/03 18:08:30 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:17:17 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	game_start(t_scene_info *sc_info)
 
 	game = malloc(sizeof(t_game_info));
 	if (game == NULL)
-		return (perror("GAME_START"), -1);
+		return (printf("GAME_START"), -1);
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
 		return (close_game(game), -1);
