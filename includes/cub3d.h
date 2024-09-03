@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/02 17:56:47 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:56:35 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -134,6 +134,7 @@ typedef struct s_game_info
 	t_img			torch[8];
 	t_texs			texs;
 	t_player		pl;
+	t_scene_info	*sc_info;
 }	t_game_info;
 
 typedef struct s_ray

@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:01 by aggrigor          #+#    #+#             */
-/*   Updated: 2024/09/03 16:58:01 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:57:16 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,23 +15,41 @@
 
 int	close_game(t_game_info *game)
 {
-	mlx_destroy_image(game->mlx, game->torch[0].img);
-	mlx_destroy_image(game->mlx, game->torch[1].img);
-	mlx_destroy_image(game->mlx, game->torch[2].img);
-	mlx_destroy_image(game->mlx, game->torch[3].img);
-	mlx_destroy_image(game->mlx, game->torch[4].img);
-	mlx_destroy_image(game->mlx, game->torch[5].img);
-	mlx_destroy_image(game->mlx, game->torch[6].img);
-	mlx_destroy_image(game->mlx, game->torch[7].img);
+	free_scene_info_struct(game->sc_info);
+	if (game->torch[0].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[0].img);
+	if (game->torch[1].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[1].img);
+	if (game->torch[2].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[2].img);
+	if (game->torch[3].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[3].img);
+	if (game->torch[4].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[4].img);
+	if (game->torch[5].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[5].img);
+	if (game->torch[6].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[6].img);
+	if (game->torch[7].img != NULL)
+		mlx_destroy_image(game->mlx, game->torch[7].img);
+	if (game->texs.ea.img)
 	mlx_destroy_image(game->mlx, game->texs.ea.img);
+	if (game->texs.so.img)
 	mlx_destroy_image(game->mlx, game->texs.so.img);
+	if (game->texs.no.img)
 	mlx_destroy_image(game->mlx, game->texs.no.img);
+	if (game->texs.we.img)
 	mlx_destroy_image(game->mlx, game->texs.we.img);
+	if (game->texs.dclose.img)
 	mlx_destroy_image(game->mlx, game->texs.dclose.img);
+	if (game->texs.dopen.img)
 	mlx_destroy_image(game->mlx, game->texs.dopen.img);
+	if (game->texs.ea.img)
 	mlx_destroy_image(game->mlx, game->img.img);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
+	
+	free(game);
 	// system("leaks cub3D");
 	exit (0);
 }
@@ -56,6 +74,12 @@ int	destroy_texs_imgs(void *mlx, t_texs *texs)
 	if (texs->dclose.img != NULL
 		&& mlx_destroy_image(mlx, texs->dclose.img) == -1)
 		return (-1);
+	texs->ea.img = NULL;
+	texs->no.img = NULL;
+	texs->so.img = NULL;
+	texs->we.img = NULL;
+	texs->dopen.img = NULL;
+	texs->dclose.img = NULL;
 	return (0);
 }
 
@@ -110,12 +134,12 @@ int	game_start(t_scene_info *sc_info)
 		return (perror("GAME_START"), -1);
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
-		return (-1);
+		return (free_scene_info_struct(sc_info), close_game(game), -1);
 	game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "CUB3D");
 	if (game->win == NULL)
-		return (-1);
+		return (free_scene_info_struct(sc_info), close_game(game), -1);
 	if (game_init(game, sc_info) == -1)
-		return (-1);
+		return (free_scene_info_struct(sc_info), close_game(game), -1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
 	mlx_hook(game->win, 2, 0, key_hook, game);
 	mlx_hook(game->win, 3, 0, key_down_hook, game);

@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:47:07 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/02 17:42:09 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:00:12 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -63,6 +63,7 @@ void	set_game_vars(t_game_info *game, t_scene_info *sc_info)
 	game->is_map_mini = 1;
 	game->pl.walk_speed = 0.2;
 	game->map = sc_info->map;
+	game->sc_info = sc_info;
 }
 
 int	game_init(t_game_info *game, t_scene_info *sc_info)
@@ -88,6 +89,6 @@ int	game_init(t_game_info *game, t_scene_info *sc_info)
 			destroy_texs_imgs(game->mlx, &game->texs), -1);
 	game->img.w = WIN_W;
 	game->img.h = WIN_H;
-	free(sc_info->texs);
+	// free(sc_info->texs);
 	return (0);
 }

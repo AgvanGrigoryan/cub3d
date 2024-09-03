@@ -6,7 +6,7 @@
 /*   By: aggrigor <aggrigor@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:42 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/02 21:23:03 by aggrigor         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:47:14 by aggrigor         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -47,7 +47,7 @@ void	free_scene_info_struct(t_scene_info *sc_info)
 	int	i;
 
 	i = 0;
-	while (i < 7)
+	while (i < 8)
 		free(sc_info->texs[i++].value);
 	free(sc_info->texs);
 	sc_info->texs = NULL;
