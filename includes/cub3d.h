@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:59:22 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/03 18:25:40 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:43:02 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ strerror, exit, math functions
 # define SHIFT_KEYCODE		257
 # define LEFT_ARR			123
 # define RIGHT_ARR			124
+
+// Error message
+# define D					"Duplicate\n"
 
 typedef struct s_dpoint
 {

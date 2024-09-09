@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:22:48 by natamazy          #+#    #+#             */
-/*   Updated: 2024/09/03 18:23:50 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:43:18 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,27 +90,27 @@ int	validate_scene_file(t_scene_info *sc_info, t_dyn_arr *buf)
 int	set_texures_info(t_scene_info *sc_info, t_dyn_arr *buf)
 {
 	int		i;
-	char	**splited;
+	char	**s;
 
 	i = 0;
 	while (i < buf->length && starts_with_digit(buf->arr[i]) == 0)
 	{
-		splited = ft_split(buf->arr[i], " \t\n");
-		if (splited == NULL)
+		s = ft_split(buf->arr[i], " \t\n");
+		if (s == NULL)
 			return (-1);
-		else if (arrlen(splited) != 2)
+		else if (arrlen(s) != 2)
 			return (pred("Incorrect texture format\n", BOLD, 2),
-				free_nmatrix(splited, arrlen(splited)), -1);
-		if (get_value(sc_info->texs, splited[0]) == NULL)
+				free_nmatrix(s, arrlen(s)), -1);
+		if (get_value(sc_info->texs, s[0]) == NULL)
 		{
-			if (set_value(sc_info->texs, splited[0], splited[1]) == -1)
+			if (set_value(sc_info->texs, s[0], s[1]) == -1)
 				return (pred("Unknown texture title\n", BOLD, 2),
-					free_nmatrix(splited, arrlen(splited)), -1);
+					free_nmatrix(s, arrlen(s)), -1);
 		}
 		else
-			return (pred("Duplicate\n", BOLD, 2), free(splited), -1);
-		free(splited[0]);
-		free(splited);
+			return (pred(D, BOLD, 2), free(s[0]), free(s[1]), free(s), -1);
+		free(s[0]);
+		free(s);
 		i++;
 	}
 	return (0);

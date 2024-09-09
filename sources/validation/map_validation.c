@@ -6,7 +6,7 @@
 /*   By: natamazy <natamazy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:43:36 by natamazy          #+#    #+#             */
-/*   Updated: 2024/07/25 13:44:50 by natamazy         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:41:24 by natamazy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int	is_valid_border(char *line)
 
 int	is_valid_door(t_line *map, int i, int j)
 {
+	if ((&map[i - 1] != NULL && j > map[i - 1].len)
+		|| (&map[i + 1] != NULL && j > map[i + 1].len))
+		return (-1);
 	if (&map[i - 1] != NULL && map[i - 1].val[j] != '\0'
 		&& map[i - 1].val[j] == '1'
 		&& &map[i + 1] != NULL && map[i + 1].val[j]
@@ -73,7 +76,8 @@ int	is_valid_line(t_line *map, int i, int *pl)
 	{
 		if (map[i].val[j] == '0' && is_valid_blank(map, i, j) == -1)
 			return (-1);
-		else if (map[i].val[j] == 'D' && is_valid_door(map, i, j) == -1)
+		else if (map[i].val[j] == 'D' && (is_valid_door(map, i, j) == -1
+				|| is_valid_blank(map, i, j) == -1))
 			return (-1);
 		else if (is_player(map[i].val[j], pl) == -1)
 			return (-1);
