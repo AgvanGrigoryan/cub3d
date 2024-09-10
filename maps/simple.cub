@@ -4,7 +4,6 @@ SO ./textures/main/wall_2.xpm
 EA ./textures/main/wall_1.xpm
 DO ./textures/main/dooropen42.xpm
 DC ./textures/main/doorclose.xpm
-DC ./textures/main/doorclose.xpm
 
 C 5,6,7
 F 30,31,32
