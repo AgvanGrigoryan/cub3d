@@ -124,9 +124,9 @@ int	game_start(t_scene_info *sc_info)
 	if (game_init(game, sc_info) == -1)
 		return (close_game(game), -1);
 	mlx_loop_hook(game->mlx, draw_scene, game);
-	mlx_hook(game->win, 2, 0, key_hook, game);
-	mlx_hook(game->win, 3, 0, key_down_hook, game);
-	mlx_hook(game->win, 6, 0, mouse_move, game);
+	mlx_hook(game->win, 2, (1L<<0), key_hook, game);
+	mlx_hook(game->win, 3, (1L<<1), key_down_hook, game);
+	mlx_hook(game->win, 6, (1L<<6), mouse_move, game);
 	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 	return (0);

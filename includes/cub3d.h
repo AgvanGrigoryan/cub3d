@@ -47,16 +47,16 @@ strerror, exit, math functions
 # define CELL_SZ			10
 
 // Keycodes
-# define A_KEYCODE			0
-# define S_KEYCODE			1
-# define D_KEYCODE			2
-# define W_KEYCODE			13
-# define M_KEYCODE			46
-# define E_KEYCODE			14
-# define ESC_KEYCODE		53
-# define SHIFT_KEYCODE		257
-# define LEFT_ARR			123
-# define RIGHT_ARR			124
+# define A_KEYCODE			97
+# define S_KEYCODE			115
+# define D_KEYCODE			100
+# define W_KEYCODE			119
+# define M_KEYCODE			109
+# define E_KEYCODE			101
+# define ESC_KEYCODE		65307
+# define SHIFT_KEYCODE		65505
+# define LEFT_ARR			65361
+# define RIGHT_ARR			65363
 
 // Error message
 # define D					"Duplicate\n"

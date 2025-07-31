@@ -9,8 +9,8 @@ CC = cc
 
 # Compilator flags
 INC_DIRS = -I./includes -I./mlx
-LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-CFLAGS = $(INC_DIRS) -Wall -Wextra -Werror $(INC_DIRS) #-g3 -fsanitize=address
+LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+CFLAGS = $(INC_DIRS) -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 
 # Headers

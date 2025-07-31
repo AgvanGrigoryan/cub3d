@@ -86,6 +86,7 @@ void	open_door(t_game_info *game)
 
 int	key_hook(int key, t_game_info *game)
 {
+    printf("KEY:%d\n", key);
 	key_hook_1(key, game);
 	key_hook_2(key, game);
 	return (key);

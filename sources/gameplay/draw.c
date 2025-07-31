@@ -42,13 +42,12 @@ void	draw_player(t_game_info *game, double s_i, double s_j)
 
 int	draw_scene(t_game_info *game)
 {
-	mlx_clear_window(game->mlx, game->win);
+	my_mlx_image_clear(&game->img);
 	draw_clg_and_flr(game);
 	raycasting(game);
 	torch_anim(game);
 	draw_mini_map(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	my_mlx_image_clear(&game->img);
 	return (0);
 }
 
