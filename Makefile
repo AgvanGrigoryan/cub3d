@@ -9,9 +9,9 @@ CC = cc
 
 # Compilator flags
 INC_DIRS = -I./includes -I./mlx
-LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 CFLAGS = $(INC_DIRS) -Wall -Wextra -Werror #-g3 -fsanitize=address
-
+LINUX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm
 
 # Headers
 HEADERS = includes/cub3d.h includes/get_next_line.h
@@ -66,6 +66,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)/validation
 	@mkdir -p $(OBJS_DIR)/gameplay
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+linux_cub3d: $(OBJS)
+	@$(CC) $(CFLAGS) $^ -o $(NAME) $(LINUX_FLAGS)
 
 # Cleaning
 clean:

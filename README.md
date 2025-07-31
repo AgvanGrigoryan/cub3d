@@ -56,6 +56,10 @@ git submodule update --init --recursive
 ```bash
 make
 ```
+- if you are on linux:
+```bash
+make linux_cub3d
+```
 
 - To clean:
 ```bash
@@ -95,6 +99,8 @@ The map must be valid and properly structured. The program exits with an error m
 - Mouse – Look around (bonus)  
 - `ESC` – Exit the game
 
+**⚠️NOTE:**
+    Your button codes may differ from the codes written in cub3d.h. Change them if problems occur.
 ---
 
 ## 📐 Map File Format (`.cub`)
